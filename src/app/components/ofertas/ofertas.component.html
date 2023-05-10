@@ -1,0 +1,70 @@
+<div class="flex items-baseline justify-between border-b border-gray-200 py-8">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white uppercase">Ofertas
+    </h1>
+</div>
+
+<div class="flex relative rounded-xl overflow-hidden items-center justify-center my-3">
+    <div class="cursor-pointer flex items-center justify-center w-8 h-8 p-2 m-3 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 hover:bg-white/50 dark:hover:bg-gray-800/60"
+        (click)="scrollPrevious()">
+        <i class='bx bx-chevron-left bx-md'></i>
+    </div>
+    <div class="relative w-full flex gap-6 snap-x snap-mandatory overflow-hidden" #product>
+        <div class="relative w-full flex gap-6 snap-x snap-mandatory py-3" #product>
+            <div class="snap-start shrink-0">
+                <div class="shrink-0 w-1"></div>
+            </div>
+            <div class="snap-always snap-start shrink-0 first:pl-8 last:pr-8 w-60" *ngFor="let product of products">
+                <a href="{{ product.link }}" class="group">
+                    <div
+                        class="bg-white dark:bg-gray-800 dark:text-white rounded-lg overflow-hidden border border-gray-200 dark:border-0 shadow-md">
+                        <img class="shrink-0 w-full  h-40 bg-cover bg-center shadow-xl next-object group-hover:opacity-75 transform group-hover:scale-105  group-hover:ease-out duration-500"
+                            src="{{ product.image }}">
+                        <div class="m-3">
+                            <h2 class="uppercase">
+                                <p class="font-bold">PC Glorious</p>
+                                <div class="badge badge-primary">Nueva</div>
+                            </h2>
+                            <div class=" mb-2"><a href="">
+                                    <div class="badge badge-sm badge-info badge-outline">Existencia<i
+                                            class="fa-solid fa-check ml-1"></i></div>
+                                </a><a href="">
+                                    <div class="badge badge-sm badge-secondary badge-outline">PC Escritorio</div>
+                                </a></div>
+                            <span class="tracking-tighter uppercase line-clamp-1 text-sm">NVIDIA® GeForce RTX™ 3060 /
+                                Intel
+                                Core i5-11400F / 16GB RAM / 480GB SSD M.2 NVMe / DISIPADOR POR AIRE / 5 VENTILADORES
+                                ARGB /
+                                650W
+                                80+ BRONZE</span>
+                            <div class="flex justify-center">
+                                <p class="text-lg font-medium text-gray-900 dark:text-white text-end"> $21,999.00</p>
+                                <p class="text-sm font-light text-gray-500 line-through pl-1 text-start"> $23,999.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="snap-always snap-start shrink-0 first:pl-8 last:pr-8 w-60">
+                <a href="" class="group">
+                    <div
+                        class="bg-white dark:bg-gray-800 rounded-lg border border-pink-500 dark:border-cyan-400 shadow-md h-full">
+                        <div class="flex items-center justify-center h-full">
+                            <button class="btn btn-secondary dark:btn-info rounded-full h-24 w-24 p-3">Ver más ofertas<i
+                                    class='bx bx-right-arrow-alt bx-lg pl-1'></i></button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="snap-center shrink-0">
+                <div class="shrink-0 w-4 sm:w-48"></div>
+            </div>
+        </div>
+        <div class="snap-center shrink-0">
+            <div class="shrink-0 w-4 sm:w-48"></div>
+        </div>
+    </div>
+    <div class="cursor-pointer flex items-center justify-center w-8 h-8 p-2 m-3 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 hover:bg-white/50 dark:hover:bg-gray-800/60"
+        (click)="scrollNext()">
+        <i class='bx bx-chevron-right bx-md'></i>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="flex relative w-auto lg:w-full items-center justify-center" [ngStyle]="{'min-height': finalHeight}">
+    <div class="flex absolute z-10 w-[95%] m-auto justify-between">
+        <div class="cursor-pointer flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 hover:bg-white/50 dark:hover:bg-gray-800/60 opacity-80"
+            (click)="setBack()"><i class='bx bx-chevron-left bx-md'></i></div>
+        <div class="cursor-pointer flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 hover:bg-white/50 dark:hover:bg-gray-800/60 opacity-80"
+            (click)="setNext()"><i class='bx bx-chevron-right bx-md'></i></div>
+    </div>
+    <div class="flex overflow-hidden w-full text-center self-stretch rounded-lg">
+        <ng-container *ngFor="let section of items;">
+            <div [ngStyle]="{'background-image': 'url('+ section.image +')', 'margin-left': section.marginLeft + '%'}"
+                class="flex flex-col float-left items-center justify-center min-w-full h-full bg-cover bg-center transform ease-in duration-300">
+                <h1 class="text-white font-semibold uppercase">{{ section.title?.first }} <span
+                        class="text-custom-400">{{ section.title?.second }}</span></h1>
+                <p class="text-white font-medium">{{ section.subtitle }}</p>
+                </div>
+        </ng-container>
+    </div>
+    <div class="flex absolute bottom-4 w-full justify-center">
+        <div [ngClass]="currentPosition === item.id ? 'bg-blue-700': ''" class="h-2 w-2 m-1 cursor-pointer rounded-full bg-white/30 dark:bg-white-800/30 hover:opacity-70 dark:hover:opacity-70"
+            *ngFor="let item of items" (click)="setCurrentPosition(item.id)"></div>
+    </div>
+</div>
