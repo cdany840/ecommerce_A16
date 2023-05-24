@@ -9,6 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'hk-grotesk': ['Hanken Grotesk', 'sans-serif']
+      },
       colors:{
         custom: {
           100: '#D2F1E8',
@@ -25,6 +28,7 @@ module.exports = {
     },
   },
   plugins: [
-    require('daisyui'),]
+    require('daisyui'),
+  ]
 
   }

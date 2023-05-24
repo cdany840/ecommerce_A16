@@ -1,9 +1,6 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-//import Swal from 'sweetalert2'
-
+import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -12,27 +9,36 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginPageComponent {
 
-  private fb          = inject( FormBuilder );
-  private authService = inject( AuthService );
-  private router      = inject( Router )
+  constructor(private authService: AuthService, private fb: FormBuilder) { }
 
+  get email(){
+    return this.loginForm.get('email') as FormControl;
+  }
 
-  public myForm: FormGroup = this.fb.group({
-    email:    ['cdanymira@gmail.com', [ Validators.required, Validators.email ]],
-    password: ['qwerty', [ Validators.required, Validators.minLength(6) ]],
+  get password(){
+    return this.loginForm.get('password') as FormControl;
+  }
+
+  loginForm = this.fb.group({
+    'email': ['', [Validators.required, Validators.email]],
+    'password': ['', [Validators.required, Validators.minLength(6)]]
   });
 
   login() {
-    const { email, password } = this.myForm.value;
+    const email = this.loginForm.get('email')?.value;
+    const password = this.loginForm.get('password')?.value;
 
-    this.authService.login(email, password)
-      .subscribe({
-        next: () => this.router.navigateByUrl('/productos'),
+    if (email && password) {
+
+      this.authService.login(email, password).subscribe({
+        next: () => window.location.href = '/',
         error: (message) => {
-          console.log(message)
+          console.log(message);
         }
-      })
-
+      });
+    } else{
+      this.loginForm.reset();
+    }
   }
 
 }

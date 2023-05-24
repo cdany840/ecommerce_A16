@@ -1,7 +1,7 @@
 <header class="bg-white dark:bg-gray-900" id="nav">
     <nav class="mx-auto flex max-w-6xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div class="flex lg:flex-1">
-            <a routerLink="" class="-m-1.5 p-1.5">
+            <a href="" class="-m-1.5 p-1.5">
                 <span class="sr-only">Your Company</span>
                 <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="">
             </a>
@@ -51,11 +51,9 @@
                                         </div>
                                         <div class="flex-auto">
                                             <a href="#" class="block font-semibold text-gray-900 dark:text-white">
-                                                Analytics
                                                 <span class="absolute inset-0"></span>
                                             </a>
-                                            <p class="mt-1 text-gray-600 dark:text-gray-200">Get a better understanding
-                                                of your traffic</p>
+                                                    <p class="mt-1 text-gray-600 dark:text-gray-200"></p>
                                         </div>
                                     </div>
                                 </li>
@@ -178,65 +176,41 @@
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-3">
             <label for="my-drawer-4" class="drawer-button btn btn-ghost btn-circle">
-                <span class="font-semibold leading-6 text-gray-700 dark:text-white"><i class='bx bx-cart-alt bx-sm'></i></span>
+                <span class="font-semibold leading-6 text-gray-700 dark:text-white"><i
+                        class='bx bx-cart-alt bx-sm'></i></span>
             </label>
-            <!-- <a routerLink="login" class="group" routerLinkActive="active">
-                <div
-                    class="grid h-full p-3 flex-grow card bg-base-300 dark:bg-gray-800 rounded-box place-items-center text-gray-900 dark:text-white text-sm group-hover:bg-custom-400">
-                    Log in
-                </div>
-            </a>
-            <div class="divider divider-horizontal text-sm text-gray-900 dark:text-white m-0"></div>
-            <a routerLink="register" class="group" routerLinkActive="active">
-                <div
-                    class="grid h-full p-3 flex-grow card bg-base-300 dark:bg-gray-800 rounded-box place-items-center text-gray-900 dark:text-white text-sm group-hover:bg-custom-400">
-                    Register
-                </div>
-            </a> -->
 
-            <div class="my-auto">
-                <button type="button"
-                    class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                    aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                    <span class="sr-only">Open user menu</span>
-                    <img class="w-9 h-9 rounded-full"
-                        src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
-                </button>
+            <div class="flex" *ngIf="!userData">
+                <a routerLink="auth/login" class="group">
+                    <div
+                        class="h-full p-3 bg-base-300 dark:bg-gray-800 rounded-box text-gray-900 dark:text-white text-sm group-hover:bg-custom-400">
+                        Log in
+                    </div>
+                </a>
+                <div class="divider divider-horizontal text-sm text-gray-900 dark:text-white m-0"></div>
+                <a routerLink="auth/register" class="group">
+                    <div
+                        class="h-full p-3 bg-base-300 dark:bg-gray-800 rounded-box text-gray-900 dark:text-white text-sm group-hover:bg-custom-400">
+                        Register
+                    </div>
+                </a>
             </div>
-            <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
-                id="dropdown-user">
-                <div class="px-4 py-3" role="none">
-                    <p class="text-sm text-gray-900 dark:text-white" role="none">
-                        Neil Sims
-                    </p>
-                    <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                        neil.sims@flowbite.com
-                    </p>
-                </div>
-                <ul class="py-1" role="none">
-                    <li>
-                        <a routerLink="/perfil/detalle"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                            role="menuitem">Perfil</a>
-                    </li>
-                    <li>
-                        <a routerLink="/perfil/compras"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                            role="menuitem">Mis compras</a>
-                    </li>
-                    <li>
-                        <a routerLink="/perfil/favoritos"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                            role="menuitem">Favoritos</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                            role="menuitem">Sign out</a>
-                    </li>
+
+            <div class="dropdown dropdown-end" *ngIf="userData">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full">
+                        <img src="{{ userData.avatar }}" />
+                    </div>
+                </label>
+                <ul tabindex="0"
+                    class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 dark:bg-gray-800 dark:text-white rounded-box w-52">
+                    <li><a routerLink="/perfil/detalle" class="justify-between">Perfil</a></li>
+                    <li><a routerLink="/perfil/compras">Mis compras</a></li>
+                    <li><a routerLink="/perfil/favoritos">Favoritos</a></li>
+                    <a class="px-4 py-2 text-sm" routerLink="/admin" *ngIf=" userData.roles[0] === 'admin' ">Dashboard</a>
+                    <li><a (click)="logout()">Logout</a></li>
                 </ul>
             </div>
-
             <label class="swap swap-rotate text-gray-600">
                 <input type="checkbox" (click)="toggleDarkMode()" class="hidden">
                 <svg class="swap-off fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -311,15 +285,14 @@
                         <a href="#"
                             class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 dark:text-white hover:bg-custom-400">Company</a>
                     </div>
-                    <div class="py-6">
+                    <div class="py-6" *ngIf="userData">
                         <div class="inline-flex items-center gap-3 w-full">
                             <button type="button"
                                 class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 hover:bg-custom-400"
                                 id="user-menu-button" aria-expanded="false" aria-haspopup="true" (click)="mobileUser()">
-                                <img class="h-8 w-8 rounded-full"
-                                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
+                                <img class="h-8 w-8 rounded-full" src="{{ userData.avatar }}" alt="">
                                 <span class="font-semibold text-gray-900 dark:text-white pl-3">
-                                    Luis Miguel Pérez Padrón
+                                    {{ userData.name }}
                                 </span>
                                 <svg [ngClass]="{'rotate-180': !mobileUMenu}"
                                     class="h-5 w-5 ml-auto text-gray-900 dark:text-white" viewBox="0 0 20 20"
@@ -333,23 +306,25 @@
                         <div class="mt-2 space-y-2" id="disclosure-1" [@fadeInOut]="!mobileUMenu ? 'open' : 'close'"
                             [ngClass]="{'hidden': mobileUMenu}">
                             <a routerLink="/perfil/detalle" (click)="mobileMOpen()"
-                                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 dark:text-white hover:bg-custom-400">Perfil</a>
+                                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 dark:text-white hover:bg-custom-400 cursor-pointer">Perfil</a>
                             <a routerLink="/perfil/compras" (click)="mobileMOpen()"
-                                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 dark:text-white hover:bg-custom-400">Mis compras</a>
+                                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 dark:text-white hover:bg-custom-400 cursor-pointer">Mis
+                                compras</a>
                             <a routerLink="/perfil/favoritos" (click)="mobileMOpen()"
-                                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 dark:text-white hover:bg-custom-400">Favoritos</a>
+                                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 dark:text-white hover:bg-custom-400 cursor-pointer">Favoritos</a>
 
-                            <form method="POST" action="">
-                                <a href=""
-                                    class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 dark:text-white hover:bg-custom-400">Sign
-                                    out</a>
-                            </form>
+                            <a routerLink="/admin" *ngIf=" userData.roles[0] === 'admin' " (click)="mobileMOpen()"
+                                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 dark:text-white hover:bg-custom-400 cursor-pointer">Dashboard</a>
+
+                            <a (click)="logout()"
+                                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 dark:text-white hover:bg-custom-400 cursor-pointer">Sign
+                                out</a>
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 divide-x divide-gray-900/5 rounded-lg">
-                        <a href=""
+                    <div *ngIf="!userData" class="grid grid-cols-2 divide-x divide-gray-900/5 rounded-lg">
+                        <a routerLink="auth/login" (click)="mobileMOpen()"
                             class="flex items-center justify-center text-sm font-semibold leading-6 text-gray-900 dark:text-white gap-x-2.5 py-2 px-6 hover:bg-custom-400 rounded-r rounded-lg">Login</a>
-                        <a href=""
+                        <a routerLink="auth/register" (click)="mobileMOpen()"
                             class="flex items-center justify-center text-sm font-semibold leading-6 text-gray-900 dark:text-white gap-x-2.5 py-2 px-6 hover:bg-custom-400 rounded-l rounded-lg">Register</a>
                     </div>
                 </div>

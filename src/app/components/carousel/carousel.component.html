@@ -1,22 +1,56 @@
-<div class="flex relative w-auto lg:w-full items-center justify-center" [ngStyle]="{'min-height': finalHeight}">
-    <div class="flex absolute z-10 w-[95%] m-auto justify-between">
-        <div class="cursor-pointer flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 hover:bg-white/50 dark:hover:bg-gray-800/60 opacity-80"
-            (click)="setBack()"><i class='bx bx-chevron-left bx-md'></i></div>
-        <div class="cursor-pointer flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 hover:bg-white/50 dark:hover:bg-gray-800/60 opacity-80"
-            (click)="setNext()"><i class='bx bx-chevron-right bx-md'></i></div>
+<div class="grid grid-cols-10 gap-2.5">
+    <div class="hidden col-span-2 lg:grid">
+        <div class="rounded-lg overflow-hidden drop-shadow-lg">
+            <h1 class="text-xl text-white bg-gray-800 uppercase p-3 font-bold drop-shadow-lg"><i class='bx bx-menu bx-sm mr-1 inline-block align-middle'></i>Categorías</h1>
+            <div *ngFor="let c of categories" class="bg-white dark:bg-gray-900 hover:bg-custom-400 hover:dark:bg-custom-400 dark:text-white cursor-pointer p-3 transform ease-in-out duration-200" [attr.data-dropdown-toggle]="c.toggle" data-dropdown-trigger="hover" data-dropdown-placement="right-start">
+                <a class="uppercase font-semibold"><i class='bx bx-laptop bx-sm mr-1 inline-block align-middle'></i>{{c.category}}<i class='bx bx-chevron-right bx-sm float-right'></i></a>
+            </div>
+        </div>
     </div>
-    <div class="flex overflow-hidden w-full text-center self-stretch rounded-lg">
-        <ng-container *ngFor="let section of items;">
-            <div [ngStyle]="{'background-image': 'url('+ section.image +')', 'margin-left': section.marginLeft + '%'}"
-                class="flex flex-col float-left items-center justify-center min-w-full h-full bg-cover bg-center transform ease-in duration-300">
-                <h1 class="text-white font-semibold uppercase">{{ section.title?.first }} <span
-                        class="text-custom-400">{{ section.title?.second }}</span></h1>
-                <p class="text-white font-medium">{{ section.subtitle }}</p>
+    <div class="col-span-10 lg:col-span-8">
+        <div *ngFor="let c of categories" class="z-20 hidden w-[35%] rounded-lg overflow-hidden drop-shadow-lg" id="{{c.toggle}}">
+            <div class="bg-gray-800">
+                <div class="p-3 text-white">
+                    <a href="" class="uppercase font-semibold"><i class='bx bx-laptop bx-sm mr-1 inline-block align-middle'>{{c.category}}</i></a>
                 </div>
-        </ng-container>
-    </div>
-    <div class="flex absolute bottom-4 w-full justify-center">
-        <div [ngClass]="currentPosition === item.id ? 'bg-blue-700': ''" class="h-2 w-2 m-1 cursor-pointer rounded-full bg-white/30 dark:bg-white-800/30 hover:opacity-70 dark:hover:opacity-70"
-            *ngFor="let item of items" (click)="setCurrentPosition(item.id)"></div>
+                <div class="grid grid-cols-3 bg-white dark:bg-gray-900 p-3 dark:text-white">
+                    <div class="col-span-1">
+                        <a *ngFor="let s of c.subcategory.slice(0, 3)" href="/productos/{{s._id}}" class="block bg-gray-200 hover:bg-custom-400 dark:bg-gray-800 hover:dark:bg-custom-400 rounded-lg p-3 text-sm font-semibold drop-shadow-lg transform ease-in-out duration-200 my-2 mx-2">{{s.subcategory}}</a>
+                    </div>
+                    <div class="col-span-1">
+                        <a *ngFor="let s of c.subcategory.slice(4, 9)" href="/productos/{{s._id}}" class="block bg-gray-200 hover:bg-custom-400 dark:bg-gray-800 hover:dark:bg-custom-400 rounded-lg p-3 text-sm font-semibold drop-shadow-lg transform ease-in-out duration-200 my-2 mx-2">{{s.subcategory}}</a>
+                    </div>
+                    <div class="col-span-1">
+                        <img src="{{c.front}}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex relative w-auto lg:w-full items-center justify-center" [ngStyle]="{'min-height': finalHeight}">
+            <div class="flex absolute z-10 w-[95%] m-auto justify-between">
+                <div class="cursor-pointer flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 hover:bg-white/50 dark:hover:bg-gray-800/60 opacity-80"
+                    (click)="setBack()"><i class='bx bx-chevron-left bx-md'></i></div>
+                <div class="cursor-pointer flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 hover:bg-white/50 dark:hover:bg-gray-800/60 opacity-80"
+                    (click)="setNext()"><i class='bx bx-chevron-right bx-md'></i></div>
+            </div>
+            <div class="flex overflow-hidden w-full text-center self-stretch rounded-lg">
+                <ng-container *ngFor="let section of items;">
+                    <div [ngStyle]="{'background-image': 'url('+ section.image +')', 'margin-left': section.marginLeft + '%'}"
+                        class="flex flex-col float-left items-center justify-center min-w-full h-full bg-cover bg-center transform ease-in duration-300">
+                        <h1 class="text-white font-semibold uppercase">{{ section.title?.first }} <span
+                                class="text-custom-400">{{ section.title?.second }}</span></h1>
+                        <p class="text-white font-medium">{{ section.subtitle }}</p>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="flex absolute bottom-4 w-full justify-center">
+                <div [ngClass]="currentPosition === item.id ? 'bg-blue-700': ''"
+                    class="h-2 w-2 m-1 cursor-pointer rounded-full bg-white/30 dark:bg-white-800/30 hover:opacity-70 dark:hover:opacity-70"
+                    *ngFor="let item of items" (click)="setCurrentPosition(item.id)"></div>
+            </div>
+        </div>
     </div>
 </div>
+
+

@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Products } from 'src/app/models/products';
+import { CategoryService } from 'src/app/services/category.service';
+import { ProductsService } from 'src/app/services/products.service';
 import { ThemeServiceService } from 'src/app/theme-service.service';
 
 @Component({
@@ -6,13 +10,46 @@ import { ThemeServiceService } from 'src/app/theme-service.service';
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.css']
 })
-export class ProductosComponent {
+export class ProductosComponent implements OnInit {
 
   isDarkMode = false;
 
-  constructor(private themeServiceService: ThemeServiceService) {
+  products:Products[]=[];
+
+  subcategoryId = "";
+
+  page!: number;
+
+  constructor(private themeServiceService: ThemeServiceService, private productService: ProductsService, private categoryService: CategoryService, private route: ActivatedRoute) {
     this.isDarkMode = this.themeServiceService.isDarkModeEnabled();
-  } 
+  }
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+			this.subcategoryId = params.get('subcategory') ?? ""
+		});
+
+    if(this.subcategoryId)
+      this.getProducts();
+    else
+      this.getAllProducts();
+  }
+
+  getProducts(){
+    this.productService.getProducts(this.subcategoryId).subscribe((data)=>{
+      this.products = data;
+    });
+  }
+
+  getAllProducts(){
+    this.productService.getAllProducts().subscribe((data)=>{
+      this.products = data;
+    });
+  }
+
+  addProduct(product:Products){
+    this.productService.addProduct(product);
+  }
 
   toggleDarkMode() {
     this.themeServiceService.toggleDarkMode();
@@ -28,7 +65,7 @@ export class ProductosComponent {
   categoryAside = false;
 
   filtro(){
-    this.mostrarFiltro = !this.mostrarFiltro; 
+    this.mostrarFiltro = !this.mostrarFiltro;
   }
 
   dropdownColor(){
@@ -50,5 +87,7 @@ export class ProductosComponent {
   asideCategory(){
     this.categoryAside = !this.categoryAside;
   }
+
+
 
 }

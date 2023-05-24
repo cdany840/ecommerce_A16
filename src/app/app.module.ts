@@ -15,6 +15,13 @@ import { PerfilComponent } from './views/perfil/perfil.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComprasComponent } from './components/compras/compras.component';
+import { DetalleCompraComponent } from './components/detalle-compra/detalle-compra.component';
+import { DetallePerfilComponent } from './components/detalle-perfil/detalle-perfil.component';
+import { CheckoutComponent } from './views/checkout/checkout.component';
+import { CartComponent } from './components/cart/cart.component';
+import { ShippingComponent } from './components/shipping/shipping.component';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -27,7 +34,12 @@ import { ComprasComponent } from './components/compras/compras.component';
     CarouselComponent,
     InfoProductoComponent,
     PerfilComponent,
-    ComprasComponent
+    ComprasComponent,
+    DetalleCompraComponent,
+    DetallePerfilComponent,
+    CheckoutComponent,
+    CartComponent,
+    ShippingComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +49,7 @@ import { ComprasComponent } from './components/compras/compras.component';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent],

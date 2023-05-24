@@ -1,0 +1,76 @@
+<div class="grid grid-cols-12 dark:text-white w-full gap-2 my-3">
+    <div class="col-span-12 rounded-lg border border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between p-3">
+            <div class="">
+                <a routerLink="../../products" class="cursor-pointer">
+                    <h1 class="px-1 py-2">
+                        <i class='bx bx-arrow-back inline-block align-middle mr-1'></i>
+                        Regresar
+                    </h1>
+                </a>
+            </div>
+            <div>
+                <button (click)="createProduct()"
+                    class="rounded-lg bg-indigo-700 text-white px-6 py-2 hover:opacity-70">Guardar</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 md:col-span-6">
+        <form [formGroup]="formProduct">
+            <label class="block my-1" for="">Nombre del producto</label>
+            <input (keyup)="getSlug()" formControlName="name"
+                class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full"
+                type="text" name="name" id="name">
+            <label class="block my-1" for="">Descripción</label>
+            <textarea formControlName="description"
+                class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full"
+                name="description" id="" cols="30" rows="5"></textarea>
+            <label class="block my-1" for="">Categoría</label>
+            <select (change)="getCategory()" formControlName="category" name="category"
+                class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full p-2">
+                <option value="" selected>Selecciona una categoría...</option>
+                <option *ngFor="let c of categories" value="{{c._id}}">{{c.category}}</option>
+            </select>
+            <label class="block my-1" for="">Subcategoría</label>
+            <select formControlName="subcategory" name="subcategory"
+                class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full p-2">
+                <option *ngIf="!subcategories" value="" selected>Selecciona una subcategoría...</option>
+                <option *ngFor="let s of subcategories" value="{{s._id}}" selected>{{s.subcategory }}</option>
+            </select>
+        </form>
+    </div>
+    <div class="col-span-12 md:col-span-6">
+        <form [formGroup]="formProduct">
+            <label class="block my-1" for="">Imágenes</label>
+            <div class="grid grid-cols-6 gap-2 my-2">
+                <div>
+                    <img alt="">
+                </div>
+                <div class="col-span-6">
+                    <input name="images"
+                        class="w-full dark:border-gray-700 rounded-lg cursor-pointer border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600"
+                        type="file" multiple>
+                </div>
+                <div class="col-span-6 lg:col-span-3">
+                    <label class="block my-1" for="">Precio</label>
+                    <input formControlName="price" name="price"
+                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600"
+                        type="number">
+                </div>
+                <div class="col-span-6 lg:col-span-3">
+                    <label class="block my-1" for="">#SKU</label>
+                    <input formControlName="sku" name="sku"
+                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600"
+                        type="text">
+                </div>
+                <div class="col-span-6">
+                  <label class="block my-1" for="">Slug</label>
+                  <input formControlName="slug"
+                      class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full"
+                      type="text" name="slug" [value]="slug" id="slug">
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

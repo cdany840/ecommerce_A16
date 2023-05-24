@@ -450,147 +450,46 @@
             </div>
         </form>
         <div class="lg:col-span-3">
-            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-6">
-                <a href="/producto" class="group">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-6">
+                <a *ngFor="let product of products | paginate: { itemsPerPage: 8, currentPage: page }" href="producto/{{product.slug}}" class="group drop-shadow-sm">
                     <div
-                        class="card w-full min-h-[35vh] max-h-[28rem] overflow-hidden bg-base-100 dark:bg-gray-800 drop-shadow-md group-hover:drop-shadow-2xl">
-                        <figure>
-                            <img src="https://media.istockphoto.com/id/1314343964/es/foto/unidad-de-sistema-de-gama-alta-para-el-primer-plano-de-la-computadora-de-juego.jpg?s=1024x1024&w=is&k=20&c=ASsjLSJzfd2hyzwQlvR3McJTeGduju4pMxqWZXPiCc8="
-                                alt="Shoes"
-                                class="w-full object-cover object-center group-hover:opacity-75 transform group-hover:scale-105 duration-500" />
-                        </figure>
-                        <div class="card-body p-6 dark:text-white">
-                            <h2 class="card-title uppercase">
-                                <p class="font-bold">PC Glorious</p>
-                                <i class='bx bx-heart bx-sm text-indigo-600 inline-block align-middle'></i>
+                        class="rounded-lg min-h-[35vh] max-h-[28rem] overflow-hidden bg-base-100 dark:bg-gray-800 drop-shadow-md group-hover:drop-shadow-2xl border border-gray-300/50 dark:border-0">
+
+                        <img src="{{ product.images[0] }}"
+                            class=" min-h-[10rem] max-h-[10rem] object-cover object-center mx-auto group-hover:opacity-75 transform group-hover:scale-105 duration-500" />
+
+                        <div class="pt-2 px-2 dark:text-white h-[8rem]">
+                            <a href="">
+                                <i class='bx bx-heart bx-sm text-indigo-600 float-right'></i>
+                            </a>
+                            <h2 class="flex text-sm uppercase">
+                                <p class="font-bold line-clamp-1">{{ product.name }}</p>
                             </h2>
-                            <div class="flex card-actions mb-2">
+                            <div class="flex mb-2">
                                 <a href="">
-                                    <div class="badge badge-sm badge-primary">Nueva</div>
+                                    <div class="badge badge-xs badge-primary text-xs">Nueva</div>
                                 </a>
                                 <a href="">
-                                    <div class="badge badge-sm badge-info badge-outline">Existencia<i
-                                            class="fa-solid fa-check ml-1"></i>
-                                    </div>
-                                </a>
-                                <a href="">
-                                    <div class="badge badge-sm badge-secondary badge-outline">PC
-                                        Escritorio</div>
+                                    <div class="badge badge-xs badge-info badge-outline text-xs">Existencia<i
+                                            class='bx bx-check bx-xs'></i></div>
                                 </a>
                             </div>
-                            <p class="tracking-tighter uppercase line-clamp-3 text-sm">NVIDIA® GeForce
-                                RTX™ 3060 / Intel
-                                Core
-                                i5-11400F /
-                                16GB
-                                RAM / 480GB SSD M.2 NVMe
-                                / DISIPADOR POR AIRE / 5 VENTILADORES ARGB / 650W 80+ BRONZE</p>
+                            <p class="tracking-tighter uppercase line-clamp-3 text-xs">{{ product.description }}</p>
 
-                            <div class="flex my-1">
+                            <div class="flex justify-center text-xs">
                                 <p class="text-lg font-medium text-gray-900 dark:text-white text-end">
-                                    $21,999.00</p>
+                                    {{product.price | currency}}</p>
                                 <p class="text-sm font-light text-gray-500 line-through pl-1 text-start">
                                     $23,999.00</p>
                             </div>
                         </div>
-                        <label for="my-drawer-4"
-                            class="drawer-button inline-block cursor-pointer bg-custom-400 group-hover:px-4 py-2 text-center text-sm font-semibold uppercase transition duration-200 ease-in-out hover:bg-opacity-70 text-white invisible group-hover:visible rounded-b-lg"><i
-                                class="fa-solid fa-plus"></i><i
-                                class="fa-solid fa-cart-shopping mx-1"></i>Añadir</label>
-                    </div>
-                </a>
-                <a href="/producto" class="group">
-                    <div
-                        class="card w-full min-h-[35vh] max-h-[28rem] overflow-hidden bg-base-100 dark:bg-gray-800 drop-shadow-md group-hover:drop-shadow-2xl">
-                        <figure>
-                            <img src="https://media.istockphoto.com/id/1314343964/es/foto/unidad-de-sistema-de-gama-alta-para-el-primer-plano-de-la-computadora-de-juego.jpg?s=1024x1024&w=is&k=20&c=ASsjLSJzfd2hyzwQlvR3McJTeGduju4pMxqWZXPiCc8="
-                                alt="Shoes"
-                                class="w-full object-cover object-center group-hover:opacity-75 transform group-hover:scale-105 duration-500" />
-                        </figure>
-                        <div class="card-body p-6 dark:text-white">
-                            <h2 class="card-title uppercase">
-                                <p class="font-bold">PC Glorious</p>
-                                
-                                <i class='bx bx-heart bx-sm text-indigo-600 inline-block align-middle'></i>
-                            </h2>
-                            <div class="flex card-actions mb-2">
-                                <a href="">
-                                    <div class="badge badge-sm badge-info badge-outline">Existencia<i
-                                            class="fa-solid fa-check ml-1"></i>
-                                    </div>
-                                </a>
-                                <a href="">
-                                    <div class="badge badge-sm badge-secondary badge-outline">PC
-                                        Escritorio</div>
-                                </a>
-                            </div>
-                            <p class="tracking-tighter uppercase line-clamp-3 text-sm">NVIDIA® GeForce
-                                RTX™ 3060 / Intel
-                                Core
-                                i5-11400F /
-                                16GB
-                                RAM / 480GB SSD M.2 NVMe
-                                / DISIPADOR POR AIRE / 5 VENTILADORES ARGB / 650W 80+ BRONZE</p>
-
-                            <div class="flex my-1">
-                                <p class="text-lg font-medium text-gray-900 dark:text-white text-end">
-                                    $21,999.00</p>
-                                <p class="text-sm font-light text-gray-500 line-through pl-1 text-start">
-                                    $23,999.00</p>
-                            </div>
-                        </div>
-                        <label for="my-drawer-4"
-                            class="drawer-button inline-block cursor-pointer bg-custom-400 group-hover:px-4 py-2 text-center text-sm font-semibold uppercase transition duration-200 ease-in-out hover:bg-opacity-70 text-white invisible group-hover:visible rounded-b-lg"><i
-                                class="fa-solid fa-plus"></i><i
-                                class="fa-solid fa-cart-shopping mx-1"></i>Añadir</label>
-                    </div>
-                </a>
-                <a href="/producto" class="group">
-                    <div
-                        class="card w-full min-h-[35vh] max-h-[28rem] overflow-hidden bg-base-100 dark:bg-gray-800 drop-shadow-md group-hover:drop-shadow-2xl">
-                        <figure>
-                            <img src="https://media.istockphoto.com/id/1314343964/es/foto/unidad-de-sistema-de-gama-alta-para-el-primer-plano-de-la-computadora-de-juego.jpg?s=1024x1024&w=is&k=20&c=ASsjLSJzfd2hyzwQlvR3McJTeGduju4pMxqWZXPiCc8="
-                                alt="Shoes"
-                                class="w-full object-cover object-center group-hover:opacity-75 transform group-hover:scale-105 duration-500" />
-                        </figure>
-                        <div class="card-body p-6 dark:text-white">
-                            <h2 class="card-title uppercase">
-                                <p class="font-bold">PC Glorious</p>
-                                <i class='bx bx-heart bx-sm text-indigo-600 inline-block align-middle'></i>
-                            </h2>
-                            <div class="flex card-actions mb-2">
-                                <a href="">
-                                    <div class="badge badge-sm badge-info badge-outline">Existencia<i
-                                            class="fa-solid fa-check ml-1"></i>
-                                    </div>
-                                </a>
-                                <a href="">
-                                    <div class="badge badge-sm badge-secondary badge-outline">PC
-                                        Escritorio</div>
-                                </a>
-                            </div>
-                            <p class="tracking-tighter uppercase line-clamp-3 text-sm">NVIDIA® GeForce
-                                RTX™ 3060 / Intel
-                                Core
-                                i5-11400F /
-                                16GB
-                                RAM / 480GB SSD M.2 NVMe
-                                / DISIPADOR POR AIRE / 5 VENTILADORES ARGB / 650W 80+ BRONZE</p>
-
-                            <div class="flex my-1">
-                                <p class="text-lg font-medium text-gray-900 dark:text-white text-end">
-                                    $21,999.00</p>
-                                <p class="text-sm font-light text-gray-500 line-through pl-1 text-start">
-                                    $23,999.00</p>
-                            </div>
-                        </div>
-                        <label for="my-drawer-4"
-                            class="drawer-button inline-block cursor-pointer bg-custom-400 group-hover:px-4 py-2 text-center text-sm font-semibold uppercase transition duration-200 ease-in-out hover:bg-opacity-70 text-white invisible group-hover:visible rounded-b-lg"><i
-                                class="fa-solid fa-plus"></i><i
-                                class="fa-solid fa-cart-shopping mx-1"></i>Añadir</label>
+                        <label (click)="addProduct(product)" for="my-drawer-4"
+                            class="drawer-button block cursor-pointer bg-custom-400 group-hover:px-4 py-2 mt-1 text-center text-sm font-semibold uppercase transition duration-200 ease-in-out hover:bg-opacity-70 text-white invisible group-hover:visible">
+                            <i class='bx bx-plus'></i><i class='bx bx-cart-alt mx-1'></i>Añadir</label>
                     </div>
                 </a>
             </div>
+                <pagination-controls class="float-right m-3 dark:bg-gray-800 rounded-lg" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
         </div>
     </div>
 </section>

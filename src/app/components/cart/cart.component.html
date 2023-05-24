@@ -1,0 +1,44 @@
+<h1 class="font-bold text-2xl border-b-2 border-gray-300 dark:border-gray-700 py-6 my-6 dark:text-white">Resumen de compra</h1>
+<div class="grid grid-cols-1 lg:grid-cols-6 dark:text-white">
+    <div class="col-span-1 lg:col-span-4">
+        <div class="border border-gray-300 dark:border-gray-800 rounded-lg dark:bg-gray-800 drop-shadow-lg divide-y divide-gray-300 dark:divide-gray-700 m-2">
+            <div class="p-3">
+                <p class="font-semibold text-xl">Productos</p>
+            </div>
+            <div *ngFor="let product of products" class="grid grid-cols-5 p-2">
+                <div class="col-span-2 lg:col-span-1 lg:m-2">
+                    <img class="" [src]="product.images" alt="">
+                </div>
+                <div class="col-span-3 lg:m-2">
+                    <span class="float-right m-1">({{ product.quantity }})</span>
+                    <p class="font-semibold line-clamp-1 m-1">{{ product.name }}</p>
+                    <button class="text-pink-600 m-1">Eliminar</button>
+                </div>
+                <div class="col-span-5 lg:col-span-1 lg:m-2">
+                    <p class="float-right px-2 text-sm font-light line-through">$29,999.00</p>
+                    <p class="float-right px-2 font-semibold">{{ product.price | currency }}</p>
+                </div>
+            </div>
+            <div class="flex justify-between text-lg p-3">
+                <p>Envío</p>
+                <p>$100</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-2">
+        <div class="sticky top-0 border border-gray-300 dark:border-gray-800 dark:bg-gray-800 divide-y divide-gray-300 dark:divide-gray-700 rounded-lg drop-shadow-lg m-2">
+            <div>
+                <p class="font-semibold text-xl p-3">Total de productos</p>
+            </div>
+            <div class="p-3">
+                <p>Products(1)<span class="float-right">$27,999.00</span></p>
+                <p>Envíos<span class="float-right">$100.00</span></p>
+                <p class="font-semibold text-lg">Total<span class="float-right">$27,999.00</span></p>
+            </div>
+            <div class="p-2">
+                <button routerLink="shipping" class="text-white bg-custom-400 rounded-lg w-full hover:opacity-70 text-sm font-semibold py-2 px-3">Continuar compra</button>
+            </div>
+        </div>
+    </div>
+</div>
+

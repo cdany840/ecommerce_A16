@@ -2,6 +2,10 @@ import { Component, HostBinding, OnInit } from '@angular/core';
 
 import { trigger, state, style, animate, transition,} from '@angular/animations';
 import { ThemeServiceService } from 'src/app/theme-service.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Subcategories } from 'src/app/models/subcategories';
+
 
 const fadeInOut = trigger('fadeInOut', [
   state(
@@ -55,9 +59,26 @@ const leftInOut = trigger('leftInOut', [
 
 export class NavigationComponent implements OnInit {
 
+  jwtHelper = new JwtHelperService();
+  userData: any;
+  categories: any;
+
+  constructor(private themeServiceService: ThemeServiceService, private authService:AuthService) {
+    this.isDarkMode = this.themeServiceService.isDarkModeEnabled();
+  }
+
 
   ngOnInit() {
-    
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      this.userData = this.jwtHelper.decodeToken(token);
+
+    }
+  }
+
+  logout() {
+    this.authService.logout();
   }
   
   isShow = false;
@@ -82,10 +103,6 @@ export class NavigationComponent implements OnInit {
   }
 
   isDarkMode = false;
-
-  constructor(private themeServiceService: ThemeServiceService) {
-    this.isDarkMode = this.themeServiceService.isDarkModeEnabled();
-  }
 
   toggleDarkMode() {
     this.themeServiceService.toggleDarkMode();

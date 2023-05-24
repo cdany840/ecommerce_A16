@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ICarouselItem } from './icarousel-item.metadata';
+import { Subcategories } from 'src/app/models/subcategories';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-carousel',
@@ -14,13 +16,22 @@ export class CarouselComponent implements OnInit {
 
   @Input() items: ICarouselItem[] = [];
 
+  showMenu: boolean = false;
+  closeMenu: boolean = false;
+
   public finalHeight: string | number = 0;
 
   public currentPosition = 0;
 
+  data: Subcategories[] = [];
 
-  constructor() {
+  categories: any;
+
+
+  constructor(private categoryService: CategoryService) {
     this.finalHeight = this.isFullScreen ? '100vh' : `${this.height}px`;
+
+    this.getCategories();
   }
 
   ngOnInit(): void {
@@ -32,6 +43,13 @@ export class CarouselComponent implements OnInit {
     setInterval(() => {
       this.setNext();
     }, 5000);
+    
+  }
+
+  getCategories(){
+   this.categoryService.getCategories().subscribe(data => {
+     this.categories = data;
+   });
   }
 
   setCurrentPosition(position: number) {
