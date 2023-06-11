@@ -1,0 +1,46 @@
+<div class="grid grid-cols-8 mb-6">
+    <div class="col-span-8 lg:col-span-2 rounded-lg bg-blue-500 text-white p-2 m-2">
+        <div class="flex justify-between gap-2 my-[2rem]">
+            <div>
+                <p class="text-3xl font-semibold mr-1">{{ cantidadCompras }}</p>
+                <p>Compras</p>
+            </div>
+            <i class='bx bx-shopping-bag bx-lg'></i>
+        </div>
+    </div>
+    <div class="col-span-8 lg:col-span-2 rounded-lg bg-pink-500 text-white p-2 m-2">
+        <div class="flex justify-between gap-2 my-[2rem]">
+            <div>
+                <p class="text-3xl font-semibold mr-1">{{ cantidadUsuarios }}</p>
+                <p>Usuarios registrados</p>
+            </div>
+            <i class='bx bx-group bx-lg'></i>
+        </div>
+    </div>
+    <div class="col-span-8 lg:col-span-2 rounded-lg bg-yellow-500 text-white p-2 m-2">
+        <div class="flex justify-between gap-2 my-[2rem]">
+            <div>
+                <p class="text-3xl font-semibold mr-1">{{ nuevasCompras }}</p>
+                <p>Nuevas compras</p>
+            </div>
+            <i class='bx bxs-shopping-bags bx-lg' ></i>
+        </div>
+    </div>
+    <div class="col-span-8 lg:col-span-2 rounded-lg bg-green-500 text-white p-2 m-2">
+        <div class="flex justify-between gap-2 my-[2rem]">
+            <div>
+                <p class="text-3xl font-semibold mr-1">{{ nuevosUsuarios }}</p>
+                <p>Nuevos usuarios</p>
+            </div>
+            <i class='bx bx-user bx-lg'></i>
+        </div>
+    </div>
+</div>
+
+<canvas baseChart
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [type]="'bar'">
+</canvas>

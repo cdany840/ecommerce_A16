@@ -20,6 +20,8 @@ export class InfoProductoComponent implements OnInit {
 
   product: any;
 
+  numberProducts: number = 1;
+
   constructor(private productService: ProductsService, private infoProductoService: InfoProductoService, private route: ActivatedRoute){}
 
   ngOnInit(): void {
@@ -30,7 +32,7 @@ export class InfoProductoComponent implements OnInit {
   }
 
   getProduct(){
-    this.infoProductoService.getById(this.itemId).subscribe((data)=>{
+    this.infoProductoService.getBySlug(this.itemId).subscribe((data)=>{
       this.product = data;
     });
   }
@@ -40,28 +42,19 @@ export class InfoProductoComponent implements OnInit {
   }
 
 
-  addOne(operation: string, id: string) {
-    const product = this.productService.findProductById(id);
-    if (product) {
-      if (operation === 'minus' && product.quantity > 0) {
-        product.quantity = product.quantity - 1;
-      }
-      if (operation === 'add') {
-        product.quantity = product.quantity + 1;
-      }
-      if (product.quantity === 0) {
-        this.deleteProduct(id);
-      }
-    }
-  }
-
-  deleteProduct(id: string) {
-    this.productService.deleteProducto(id);
-  }
-
   selectedImageIndex: number = 0;
 
   selectImage(index: number) {
     this.selectedImageIndex = index;
+  }
+
+  lessOne(){
+    this.numberProducts = this.numberProducts - 1
+    if(this.numberProducts < 0) this.numberProducts = 0
+  }
+
+  addOne(){
+    this.numberProducts = this.numberProducts + 1
+    if(this.numberProducts >= this.product?.stock) this.numberProducts = this.product?.stock
   }
 }

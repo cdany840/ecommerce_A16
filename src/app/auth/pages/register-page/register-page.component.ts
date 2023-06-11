@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { catchError } from 'rxjs';
 
 @Component({
   templateUrl: './register-page.component.html',
@@ -36,11 +37,13 @@ export class RegisterPageComponent {
 
     if (email && name && password) {
       this.authService.register(email, password, name)
+        .pipe(
+          catchError(() => {
+            return [];
+          })
+        )
         .subscribe({
-          next: () => this.router.navigateByUrl('auth/login'),
-          error: (message: any) => {
-            console.log(message)
-          }
+          next: () => this.router.navigateByUrl('auth/login')
         })
     }else{
       this.registerForm.reset();

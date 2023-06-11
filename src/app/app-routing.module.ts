@@ -4,22 +4,24 @@ import { HomeComponent } from './views/home/home.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { InfoProductoComponent } from './views/info-producto/info-producto.component';
 import { PerfilComponent } from './views/perfil/perfil.component';
-import { DetallePerfilComponent } from './components/detalle-perfil/detalle-perfil.component';
-import { ComprasComponent } from './components/compras/compras.component';
-import { DatosEnvioComponent } from './components/datos-envio/datos-envio.component';
-import { PagosFacturasComponent } from './components/pagos-facturas/pagos-facturas.component';
-import { FavoritosComponent } from './components/favoritos/favoritos.component';
-import { DetalleCompraComponent } from './components/detalle-compra/detalle-compra.component';
+import { DetallePerfilComponent } from './perfil/detalle-perfil/detalle-perfil.component';
+import { ComprasComponent } from './perfil/compras/compras.component';
+import { DatosEnvioComponent } from './perfil/datos-envio/datos-envio.component';
+import { PagosFacturasComponent } from './perfil/pagos-facturas/pagos-facturas.component';
+import { FavoritosComponent } from './perfil/favoritos/favoritos.component';
+import { DetalleCompraComponent } from './perfil/detalle-compra/detalle-compra.component';
 import { profileGuard } from './guards/profile.guard';
 import { CheckoutComponent } from './views/checkout/checkout.component';
 import { CartComponent } from './components/cart/cart.component';
-import { ShippingComponent } from './components/shipping/shipping.component';
 import { checkoutGuard } from './guards/checkout.guard';
 import { adminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'productos', component: ProductosComponent,},
+  { path: 'productos/ofertas', component: ProductosComponent,},
   { path: 'productos/:subcategory', component: ProductosComponent,},
+  { path: 'productos/category/:category', component: ProductosComponent,},
   { path: 'producto/:id', component: InfoProductoComponent},
   {
     path: 'perfil',
@@ -42,7 +44,7 @@ const routes: Routes = [
     canActivate: [checkoutGuard],
     children: [
       { path: 'cart', component: CartComponent},
-      { path: 'shipping', component: ShippingComponent,
+      { path: 'shipping', component: DatosEnvioComponent,
         canActivate: [profileGuard]
       },
       { path: '**', component: CartComponent },
@@ -51,6 +53,7 @@ const routes: Routes = [
 
   {
     path: 'admin',
+    canActivate: [adminGuard],
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
 

@@ -5,6 +5,7 @@ import { ThemeServiceService } from 'src/app/theme-service.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Subcategories } from 'src/app/models/subcategories';
+import { CategoryService } from 'src/app/services/category.service';
 
 
 const fadeInOut = trigger('fadeInOut', [
@@ -63,7 +64,7 @@ export class NavigationComponent implements OnInit {
   userData: any;
   categories: any;
 
-  constructor(private themeServiceService: ThemeServiceService, private authService:AuthService) {
+  constructor(private themeServiceService: ThemeServiceService, private authService:AuthService, private categoryService: CategoryService) {
     this.isDarkMode = this.themeServiceService.isDarkModeEnabled();
   }
 
@@ -75,6 +76,7 @@ export class NavigationComponent implements OnInit {
       this.userData = this.jwtHelper.decodeToken(token);
 
     }
+    this.getCategories();
   }
 
   logout() {
@@ -108,5 +110,11 @@ export class NavigationComponent implements OnInit {
     this.themeServiceService.toggleDarkMode();
     this.isDarkMode = this.themeServiceService.isDarkModeEnabled();
   }
+
+  getCategories(){
+    this.categoryService.getCategories().subscribe(data => {
+      this.categories = data;
+    });
+   }
 
 }

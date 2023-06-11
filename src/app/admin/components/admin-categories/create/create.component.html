@@ -1,0 +1,120 @@
+<div class="col-span-8 rounded-lg border border-gray-200 dark:border-gray-700 my-3">
+    <div class="flex justify-between p-3">
+        <div class="dark:text-white px-3 py-2 my-2">
+            <a routerLink="/admin/categories" class="my-auto cursor-pointer">
+                <h1><i class='bx bx-arrow-back inline-block align-middle mr-1'></i>Regresar</h1>
+            </a>
+        </div>
+        <button class="rounded-md px-3 py-2 bg-indigo-700 text-white my-2 hover:opacity-70">Agregar</button>
+    </div>
+</div>
+<div class="grid grid-cols-12 dark:text-white w-full gap-2 my-3">
+    <div class="col-span-12 md:col-span-6">
+        <label class="">Nombre</label>
+        <input type="text" name="" id="" class="rounded-md my-2 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full py-2 px-3">
+        <label class="">Icono de la categoría</label>
+        <button (click)="openModal()" class="rounded-md px-3 py-2 bg-indigo-700 text-white my-2 hover:opacity-70 w-full">Seleccionar icono</button>
+        <div class="text-center border border-base-300 rounded-lg px-3 py-2 my-2">
+            <i class="bx bx-lg inline-block align-middle" [ngClass]="iconSelect"></i>
+        </div>
+        <div class="fixed w-full h-full top-0 left-0 backdrop-blur-sm bg-gray-500/20" [ngClass]="{'visible': modal === true, 'invisible': modal === false}">
+            <div class="fixed top-[15%] sm:top-[20%] left-[15%] sm:left-[25%] sm:w-[50%] w-[70%] h-auto overflow-auto bg-white dark:bg-gray-900 rounded-lg p-4">
+                <button (click)="openModal()" class="rounded-lg border-2 border-gray-400 float-right text-gray-400 hover:text-red-500"><i class='bx bx-x bx-sm inline-block align-middle p-0.5'></i></button>
+                <div class="grid grid-cols-4 md:grid-cols-6 sm:grid-cols-3 lg:grid-cols-8 justify-center gap-1 mt-10">
+                    <div (click)="iconSelected('bx-desktop')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-desktop'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Desktop</p>
+                        <i class='bx bx-desktop bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bx-laptop')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-laptop'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Laptop</p>
+                        <i class='bx bx-laptop bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bx-headphone')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-headphone'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Headphone</p>
+                        <i class='bx bx-headphone bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bxs-keyboard')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bxs-keyboard'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Keyboard</p>
+                        <i class='bx bxs-keyboard bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bx-printer')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-printer'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Printer</p>
+                        <i class='bx bx-printer bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bx-camera')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-camera'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Camera</p>
+                        <i class='bx bx-camera bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bx-game')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-game'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Game</p>
+                        <i class='bx bx-game bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bx-mouse')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-mouse'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Mouse</p>
+                        <i class='bx bx-mouse bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bx-chip')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-chip'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Chip</p>
+                        <i class='bx bx-chip bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bx-hdd')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-hdd'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Hard Drive</p>
+                        <i class='bx bx-hdd bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bx-memory-card')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-memory-card'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Memory Card</p>
+                        <i class='bx bx-memory-card bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bx-usb')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-usb'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">USB</p>
+                        <i class='bx bx-usb bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bx-cloud')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-cloud'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Cloud</p>
+                        <i class='bx bx-cloud bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bx-wifi')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-wifi'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Wifi</p>
+                        <i class='bx bx-wifi bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bx-bluetooth')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-bluetooth'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Bluetooth</p>
+                        <i class='bx bx-bluetooth bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bxs-offer')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bxs-offer'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Ofertas</p>
+                        <i class='bx bxs-offer bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bx-battery')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-battery'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Battery</p>
+                        <i class='bx bx-battery bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bx-video-recording')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-video-recording'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Grabación</p>
+                        <i class='bx bx-video-recording bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bx-music')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-music'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Speaker</p>
+                        <i class='bx bx-music bx-lg inline-block align-middle'></i>
+                    </div>
+                    <div (click)="iconSelected('bx-microphone')" [ngClass]="{'border-indigo-700 text-indigo-700': iconSelect === 'bx-microphone'}" class="rounded-lg border-2 border-gray-400 h-[7rem] text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <p class="">Microphone</p>
+                        <i class='bx bx-microphone bx-lg inline-block align-middle'></i>
+                    </div>
+                </div>
+                <button (click)="openModal()" class="text-white bg-indigo-700 rounded-lg float-right px-3 py-2 my-2">Confirmar</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 md:col-span-6">
+        <label class="">Imagen de categoría</label>
+        <label for="image" class="block rounded-md my-2 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full py-2 px-3">
+            <span>Selecciona una imagen</span>
+            <input (change)="imgSelected($event)" type="file" class="hidden" name="" id="image">
+        </label>
+        <div class="flex justify-center border-dashed border-2 border-base-300 h-[28rem]">
+            <img *ngIf="selectedImage" [src]="selectedImage" class="object-cover w-[12rem] h-[28rem]" alt="">
+        </div>
+    </div>
+</div>
+

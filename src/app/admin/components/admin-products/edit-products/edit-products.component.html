@@ -10,32 +10,55 @@
                 </a>
             </div>
             <div>
-                <button class="rounded-lg bg-indigo-700 text-white px-6 py-2 hover:opacity-70">Guardar</button>
+                <button (click)="updateProduct()" class="rounded-lg bg-indigo-700 text-white px-6 py-2 hover:opacity-70">Guardar</button>
             </div>
         </div>
     </div>
     <div class="col-span-12 md:col-span-6">
         <form [formGroup]="formProduct">
             <label class="block my-1" for="">Nombre del producto</label>
-            <input formControlName="name"
-                class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full"
-                type="text" name="name" id="name">
-            <label class="block my-1" for="">Descripción</label>
-            <textarea formControlName="description"
-                class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full"
-                name="description" id="" cols="30" rows="5"></textarea>
-            <label class="block my-1" for="">Categoría</label>
-            <select (change)="getCategory()" name="category"
-                class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full p-2">
-                <option value="{{ formProduct.value.category }}" selected>{{ formProduct.value.category }}</option>
-                <option *ngFor="let c of categories" value="{{c._id}}">{{c.category}}</option>
-            </select>
-            <label class="block my-1" for="">Subcategoría</label>
-            <select formControlName="subcategory" name="subcategory"
-                class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full p-2">
-                <option value="{{ formProduct.value.subcategory }}" selected>{{ formProduct.value.subcategory }}</option>
-                <option *ngFor="let s of subcategories" value="{{s._id}}" selected>{{s.subcategory }}</option>
-            </select>
+            <div class="grid grid-cols-6 gap-2 my-2">
+                <div class="col-span-6">
+                    <input (keyup)="getSlug()" formControlName="name"
+                    class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full px-3 py-2"
+                    type="text" name="name" id="name">
+                </div>
+                <div class="col-span-6">
+                    <label class="block my-1" for="">Descripción</label>
+                    <textarea formControlName="description"
+                        class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full"
+                        name="description" id="" cols="30" rows="5"></textarea>
+                </div>
+                <div class="col-span-6">
+                    <label class="block my-1" for="">Categoría</label>
+                    <select (change)="getCategory()" formControlName="category" name="category"
+                        class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full p-2">
+                        <option *ngIf="categories" [value]="formProduct.value.category">{{ categoryActual }}</option>
+                        <option *ngFor="let c of categories" [value]="c._id">{{c.category}}</option>
+                        
+                    </select>
+                </div>
+                <div class="col-span-6">
+                    <label class="block my-1" for="">Subcategoría</label>
+                    <select formControlName="subcategory" name="subcategory"
+                        class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full p-2">
+                        <option *ngIf="subcategories" [value]="formProduct.value.subcategory">{{ subcategoryActual }}</option>
+                        <option *ngFor="let s of subcategories" [value]="s._id">{{s.subcategory }}</option>
+                    </select>
+                </div>
+                <div class="col-span-6 lg:col-span-3">
+                    <label class="block my-1" for="">#SKU</label>
+                    <input formControlName="sku" name="sku"
+                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 px-3 py-2"
+                        type="text">
+                </div>
+                <div class="col-span-6 lg:col-span-3">
+                    <label class="block my-1" for="">Disponibilidad</label>
+                    <input formControlName="stock" name="stock"
+                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 px-3 py-2"
+                        type="text">
+                </div>
+            </div>
         </form>
     </div>
     <div class="col-span-12 md:col-span-6">
@@ -46,21 +69,30 @@
                     <img [src]="image" alt="">
                 </div>
                 <div class="col-span-6">
-                    <input name="images"
-                        class="w-full dark:border-gray-700 rounded-lg cursor-pointer border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600"
-                        type="file" multiple>
+                  <label class="block my-1" for="">Slug</label>
+                  <input (change)="getSlugValue($event)" formControlName="slug"
+                      class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full px-3 py-2"
+                      type="text" name="slug" [value]="slug" id="slug">
                 </div>
                 <div class="col-span-6 lg:col-span-3">
                     <label class="block my-1" for="">Precio</label>
-                    <input formControlName="price" name="price"
-                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600"
+                    <input formControlName="price" name="price" (change)="getPriceWithOffer($event)"
+                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 px-3 py-2"
                         type="number">
                 </div>
                 <div class="col-span-6 lg:col-span-3">
-                    <label class="block my-1" for="">#SKU</label>
-                    <input formControlName="sku" name="sku"
-                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600"
-                        type="text">
+                    <label class="block my-1" for="">Precio con descuento</label>
+                    <input formControlName="old_price" name="old_price"
+                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 px-3 py-2"
+                        type="number" [value]="priceWithOffer">
+                </div>
+                <div class="col-span-6">
+                    <label class="block my-1" for="">Descuento ({{ discountNow | percent }})</label>
+                    <input (change)="setValue($event)" formControlName="discount" name="discount" id="discount" type="range" min="0" max="1" class="range range-accent dark:border dark:border-gray-700" step="0.01" value="0"/>
+                </div>
+                <div class="col-span-6">
+                    <label class="block my-1" for="">Fecha termino</label>
+                    <input type="date" [min]="fechaMinima" formControlName="date_end" class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full px-3 py-2"/>
                 </div>
             </div>
         </form>

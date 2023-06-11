@@ -13,9 +13,7 @@ export class AppComponent implements OnInit{
 
   constructor(private productsService: ProductsService) { }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void { }
 
   totalProduct(price: number, units: number) {
     return price * units;

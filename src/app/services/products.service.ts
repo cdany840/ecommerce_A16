@@ -31,8 +31,14 @@ export class ProductsService {
     return response;
   }
 
-  getProducts(sub: any): Observable<Products[]> {
+  getProductsSub(sub: any): Observable<Products[]> {
     const url = `${this.baseUrl}/product/subcategory/${sub}`
+    const response = this.http.get<Products[]>(url);
+    return response;
+  }
+
+  getProductsCat(cat: any): Observable<Products[]> {
+    const url = `${this.baseUrl}/product/category/${cat}`
     const response = this.http.get<Products[]>(url);
     return response;
   }

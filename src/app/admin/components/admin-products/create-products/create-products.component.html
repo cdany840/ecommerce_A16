@@ -2,7 +2,7 @@
     <div class="col-span-12 rounded-lg border border-gray-200 dark:border-gray-700">
         <div class="flex justify-between p-3">
             <div class="">
-                <a routerLink="../../products" class="cursor-pointer">
+                <a routerLink="../products" class="cursor-pointer">
                     <h1 class="px-1 py-2">
                         <i class='bx bx-arrow-back inline-block align-middle mr-1'></i>
                         Regresar
@@ -19,11 +19,11 @@
         <form [formGroup]="formProduct">
             <label class="block my-1" for="">Nombre del producto</label>
             <input (keyup)="getSlug()" formControlName="name"
-                class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full"
+                class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full py-2 px-3"
                 type="text" name="name" id="name">
             <label class="block my-1" for="">Descripción</label>
             <textarea formControlName="description"
-                class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full"
+                class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full py-2 px-3"
                 name="description" id="" cols="30" rows="5"></textarea>
             <label class="block my-1" for="">Categoría</label>
             <select (change)="getCategory()" formControlName="category" name="category"
@@ -37,6 +37,24 @@
                 <option *ngIf="!subcategories" value="" selected>Selecciona una subcategoría...</option>
                 <option *ngFor="let s of subcategories" value="{{s._id}}" selected>{{s.subcategory }}</option>
             </select>
+            <div class="col-span-6 mt-4">
+                <button class="rounded-lg bg-pink-600 text-white hover:opacity-80 w-full py-2 px-3" (click)="addSpec()"><i class='bx bx-plus bx-sm pr-1 inline-block align-middle'></i>Añadir especificación</button>
+                <div formArrayName="specs">
+                    <div *ngFor="let s of specs.controls; let i = index" [formGroupName]="i">
+                        <div class="grid grid-cols-10 gap-2 py-2">
+                            <div class="col-span-5">
+                                <input class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 py-2 px-3" type="text" formControlName="spec" placeholder="Característica">
+                            </div>
+                            <div class="col-span-4">
+                                <input class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 py-2 px-3" type="text" formControlName="value" placeholder="Valor">
+                            </div>
+                            <div class="col-span-1 flex justify-center">
+                                <button (click)="removeSpec(i)" class="rounded-lg border border-red-500 text-red-500 hover:bg-red-500 hover:text-white m-auto"><i class='bx bx-x bx-sm inline-block align-middle'></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
     <div class="col-span-12 md:col-span-6">
@@ -47,27 +65,49 @@
                     <img alt="">
                 </div>
                 <div class="col-span-6">
-                    <input name="images"
-                        class="w-full dark:border-gray-700 rounded-lg cursor-pointer border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600"
-                        type="file" multiple>
+                    <label for="images" class="flex items-center cursor-pointer text-sm rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full py-2 px-3">
+                        <span>Seleccionar imágenes</span>
+                        <input (change)="onFileChanged($event)" formControlName="images" name="images" id="images" class="hidden" type="file" accept="image/*" multiple>
+                    </label>
+                </div>
+                <div class="col-span-6">
+                    <label class="block my-1" for="">Slug</label>
+                    <input formControlName="slug"
+                        class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full py-2 px-3"
+                        type="text" name="slug" [value]="slug" id="slug">
                 </div>
                 <div class="col-span-6 lg:col-span-3">
                     <label class="block my-1" for="">Precio</label>
-                    <input formControlName="price" name="price"
-                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600"
+                    <input formControlName="price" name="price" (change)="getPriceWithOffer($event)"
+                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 py-2 px-3"
                         type="number">
+                </div>
+                <div class="col-span-6 lg:col-span-3">
+                    <label class="block my-1" for="">Precio con descuento</label>
+                    <input formControlName="old_price" name="old_price"
+                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 py-2 px-3"
+                        type="number" [value]="priceWithOffer">
+                </div>
+                <div class="col-span-6">
+                    <label class="block my-1" for="">Descuento ({{ discountNow | percent }})</label>
+                    <input (change)="setValue($event)" formControlName="discount" name="discount" id="discount" type="range" min="0" max="1" class="range range-accent dark:border dark:border-gray-700" step="0.01" value="0"/>
                 </div>
                 <div class="col-span-6 lg:col-span-3">
                     <label class="block my-1" for="">#SKU</label>
                     <input formControlName="sku" name="sku"
-                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600"
+                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 py-2 px-3"
                         type="text">
                 </div>
+                <div class="col-span-6 lg:col-span-3">
+                    <label class="block my-1" for="">Disponibilidad</label>
+                    <input formControlName="stock" name="stock"
+                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 py-2 px-3"
+                        type="text">
+                </div>
+                
                 <div class="col-span-6">
-                  <label class="block my-1" for="">Slug</label>
-                  <input formControlName="slug"
-                      class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full"
-                      type="text" name="slug" [value]="slug" id="slug">
+                    <label class="block my-1" for="">Fecha termino</label>
+                    <input type="date" [min]="fechaStart" formControlName="date_end" class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full py-2 px-3"/>
                 </div>
             </div>
         </form>

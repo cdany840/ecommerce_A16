@@ -14,13 +14,15 @@
                 <div *ngFor="let product of myCart$ | async" class=" my-1">
                     <div class="grid grid-cols-6 rounded-lg border border-gray-700">
                         <div class="col-span-3 p-2">
-                            <img class="w-auto object-contain rounded-lg" src="{{ product.images }}" alt="">
+                            <a href="producto/{{product.slug}}">
+                                <img class="w-auto max-h-[100px] object-contain mx-auto rounded-lg"
+                                    src="{{ product.images[0] }}" alt="">
+                            </a>
                         </div>
                         <div class="col-span-3 p-2">
                             <a href="producto/{{product.slug}}">
                                 <div class="flex uppercase">
                                     <h2 class="card-title text-sm line-clamp-1">{{ product.name }}</h2>
-                                    <div class="badge badge-primary text-xs">Nueva</div>
                                 </div>
                                 <p class="tracking-tighter uppercase line-clamp-1 text-xs text-gray-500">{{
                                     product.description }}</p>
@@ -28,8 +30,7 @@
                                     <p class="text-md font-medium text-gray-900 dark:text-white text-end">{{
                                         product.price |
                                         currency }}</p>
-                                    <p class="text-xs font-light text-gray-500 line-through text-start">$23,999.00
-                                    </p>
+                                    <p *ngIf="product.old_price > 0" class="text-xs font-light text-gray-500 line-through text-start">{{ product.old_price | currency }}</p>
                                 </div>
                             </a>
                             <button (click)="addOne('minus', product._id)"

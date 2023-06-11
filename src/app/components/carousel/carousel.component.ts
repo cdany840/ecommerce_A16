@@ -16,9 +16,6 @@ export class CarouselComponent implements OnInit {
 
   @Input() items: ICarouselItem[] = [];
 
-  showMenu: boolean = false;
-  closeMenu: boolean = false;
-
   public finalHeight: string | number = 0;
 
   public currentPosition = 0;
@@ -27,11 +24,12 @@ export class CarouselComponent implements OnInit {
 
   categories: any;
 
+  menu = false;
+
+  toggle: any;
 
   constructor(private categoryService: CategoryService) {
     this.finalHeight = this.isFullScreen ? '100vh' : `${this.height}px`;
-
-    this.getCategories();
   }
 
   ngOnInit(): void {
@@ -43,6 +41,8 @@ export class CarouselComponent implements OnInit {
     setInterval(() => {
       this.setNext();
     }, 5000);
+
+    this.getCategories();
     
   }
 
@@ -93,5 +93,14 @@ export class CarouselComponent implements OnInit {
   }
 
 
+  sideMenu(category: any){
+    category.toggle = true;
+  }
+
+  hidePopover() {
+    for (const c of this.categories) {
+      c.toggle = false;
+    }
+  }
 
 }

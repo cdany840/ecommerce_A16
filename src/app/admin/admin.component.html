@@ -8,37 +8,22 @@
                 Menu
             </h1>
         </div>
-        <div class="relative rounded-lg shadow-sm w-1/2 lg:w-1/4">
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <i class='bx bx-search-alt-2 bx-sm text-slate-400 dark:text-slate-400/50'></i>
-            </div>
-            <input type="text" placeholder="Buscar"
-                class="block border-gray-200 dark:border-0 w-full pl-10 py-1 px-3 text-slate-500 rounded-lg dark:bg-slate-800 dark:text-slate-400">
-        </div>
     </div>
 </div>
-<div class="grid grid-cols-8 lg:grid-cols-12 gap-2">
+<div class="grid grid-cols-8 lg:grid-cols-12 gap-2 mb-6">
     <div *ngIf="menu" class="col-span-2 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 dark:text-white">
-        <a routerLink=""
-            class="block border border-gray-200 hover:bg-blue-500 dark:border-gray-700 rounded-lg m-2 px-1 py-2"><i
-                class='bx bx-shopping-bag bx-sm inline-block align-middle mr-1'></i><span
-                class="hidden invisible md:visible md:inline-flex">Compras</span></a>
-        <a routerLink=""
-            class="block border border-gray-200 hover:bg-blue-500 dark:border-gray-700 rounded-lg m-2 px-1 py-2"><i
+        <a routerLink="stats" routerLinkActive="bg-custom-400 text-white"
+            class="block border border-gray-200 hover:bg-blue-500 hover:text-white dark:border-gray-700 rounded-lg m-2 px-1 py-2"><i
+                class='bx bx-bar-chart-alt-2 bx-sm inline-block align-middle mr-1'></i><span
+                class="hidden invisible md:visible md:inline-flex">Estadísticas</span></a>
+        <a routerLink="categories" routerLinkActive="bg-custom-400 text-white"
+            class="block border border-gray-200 hover:bg-blue-500 hover:text-white dark:border-gray-700 rounded-lg m-2 px-1 py-2"><i
                 class='bx bx-category bx-sm inline-block align-middle mr-1'></i><span
                 class="hidden invisible md:visible md:inline-flex">Categorías</span></a>
-        <a routerLink=""
-            class="block border border-gray-200 hover:bg-blue-500 dark:border-gray-700 rounded-lg m-2 px-1 py-2"><i
-                class='bx bx-package bx-sm inline-block align-middle mr-1'></i><span
-                class="hidden invisible md:visible md:inline-flex">Provedores</span></a>
-        <a routerLink="products" routerLinkActive="bg-custom-400"
-            class="block border border-gray-200 hover:bg-blue-500 dark:border-gray-700 rounded-lg m-2 px-1 py-2"><i
+        <a routerLink="products" routerLinkActive="bg-custom-400 text-white"
+            class="block border border-gray-200 hover:bg-blue-500 hover:text-white dark:border-gray-700 rounded-lg m-2 px-1 py-2"><i
                 class='bx bx-cart-alt bx-sm inline-block align-middle mr-1'></i><span
                 class="hidden invisible md:visible md:inline-flex">Productos</span></a>
-        <a routerLink=""
-            class="block border border-gray-200 hover:bg-blue-500 dark:border-gray-700 rounded-lg m-2 px-1 py-2"><i
-                class='bx bxs-offer bx-sm inline-block align-middle mr-1'></i><span
-                class="hidden invisible md:visible md:inline-flex">Ofertas</span></a>
     </div>
     <div [ngClass]="{'col-span-8 lg:col-span-12': menu===false}"
         class="col-span-6 lg:col-span-10 bg-gray-100 dark:bg-gray-800 rounded-lg p-3">

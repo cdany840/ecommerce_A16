@@ -1,0 +1,67 @@
+<div
+    class="dark:bg-gray-800 rounded-lg shadow-lg border border-gray-300/60 dark:border-0 divide-y divide-gray-200 dark:divide-gray-700 dark:text-white">
+    <form [formGroup]="perfilForm" autocomplete="off">
+        <div class="dark:border-gray-700 p-3">
+            <span class="font-semibold">Información personal</span>
+        </div>
+        <div class="grid grid-cols-6 gap-3 p-3">
+            <div class="grid justify-items-center col-span-6 lg:col-span-2 gap-7">
+                <span class="font-semibold">Avatar</span>
+                <img [src]="url || user?.avatar" class="h-28 w-28 rounded-full" alt="">
+                <label for="avatar" class="flex items-center cursor-pointer text-sm dark:bg-gray-600 rounded-lg my-2 px-3 py-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
+                    <span class="mr-2">Seleccionar archivo</span>
+                    <input (change)="onFileChanged($event)" class="hidden" formControlName="avatar" id="avatar" (change)="imgAvatar($event)" type="file" accept="image/*">
+                </label>
+                <p class="mt-1 text-sm text-red-500 dark:text-red-300" id="file_input_help">{{ msg }}</p>
+            </div>
+            <div class="col-span-6 lg:col-span-4">
+                <div class="grid col-span-1 lg:grid-cols-2 gap-2">
+                    <div class="col-span-1">
+                        <span class="text-sm font-semibold">Nombre/s</span>
+                        <input formControlName="name" name="name" type="text"
+                            class="dark:bg-gray-600 rounded-lg my-2 px-3 py-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
+                    </div>
+                    <div class="col-span-1">
+                        <span class="text-sm font-semibold">Apellido/s</span>
+                        <input formControlName="last_name" name="last_name" type="text"
+                            class="dark:bg-gray-600 rounded-lg my-2 px-3 py-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
+                    </div>
+                </div>
+                <span class="text-sm font-semibold">Correo electrónico</span>
+                <input type="email" name="email" value="{{user?.email}}"
+                    class="dark:bg-gray-600 rounded-lg my-2 px-3 py-2 w-full opacity-70 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500"
+                    disabled>
+                <span class="text-sm font-semibold">Teléfono</span>
+                <input formControlName="phone" type="tel" name="phone" maxlength="10"
+                    class="dark:bg-gray-600 rounded-lg my-2 px-3 py-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
+
+            </div>
+        </div>
+    </form>
+    <div class="grid justify-end p-2">
+        <button (click)="update()" class="rounded-lg bg-indigo-600 text-white text-sm font-semibold py-2 px-3"
+            type="submit">Guardar cambios</button>
+    </div>
+
+</div>
+
+<div
+    class="dark:bg-gray-800 rounded-lg shadow-lg border border-gray-300/60 dark:border-0 divide-y divide-gray-200 dark:divide-gray-700 dark:text-white mt-3">
+    <div class="dark:border-gray-700 p-3">
+        <span class="font-semibold">Cambiar contraseña</span>
+    </div>
+    <div class="p-3">
+        <span class="text-sm font-semibold">Contraseña anterior</span>
+        <input type="password"
+            class="dark:bg-gray-600 rounded-lg my-2 px-3 py-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
+        <span class="text-sm font-semibold">Nueva contraseña</span>
+        <input type="password"
+            class="dark:bg-gray-600 rounded-lg my-2 px-3 py-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
+        <span class="text-sm font-semibold">Confirmar contraseña</span>
+        <input type="password"
+            class="dark:bg-gray-600 rounded-lg my-2 px-3 py-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
+    </div>
+    <div class="grid justify-end p-2">
+        <button class="rounded-lg bg-indigo-600 text-white text-sm font-semibold py-2 px-3">Guardar cambios</button>
+    </div>
+</div>

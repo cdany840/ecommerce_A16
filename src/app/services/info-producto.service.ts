@@ -14,8 +14,13 @@ export class InfoProductoService {
 
   constructor(private http: HttpClient) { }
 
-  getById(id: string): Observable<Products> {
+  getBySlug(id: string): Observable<Products> {
     const url = `${this.baseUrl}/product/${id}`;
+    return this.http.get<Products>(url);
+  }
+
+  getById(id: string): Observable<Products> {
+    const url = `${this.baseUrl}/product/id/${id}`;
     return this.http.get<Products>(url);
   }
 
@@ -24,6 +29,46 @@ export class InfoProductoService {
     return this.http.post(url, data).subscribe(
       response => {
         Swal.fire('Éxito', 'Registro creado exitosamente', 'success');
+      },
+      error => {
+        Swal.fire('Error', error.message, 'error' );
+      }
+    )
+  }
+
+  updateProduct(id: string, data: any){
+    const url = `${this.baseUrl}/product/${id}`;
+    return this.http.patch(url, data).subscribe(
+      response => {
+        Swal.fire({
+          icon: 'success',
+          title: 'El registro fue editado!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        setTimeout(function(){
+          location.reload();
+        }, 2000)
+      },
+      error => {
+        Swal.fire('Error', error.message, 'error' );
+      }
+    )
+  }
+
+  deleteProduct(id: string){
+    const url = `${this.baseUrl}/product/${id}`;
+    return this.http.delete(url).subscribe(
+      response => {
+        Swal.fire({
+          icon: 'success',
+          title: 'El registro fue eliminado!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        setTimeout(function(){
+          location.reload();
+        }, 2000)
       },
       error => {
         Swal.fire('Error', error.message, 'error' );

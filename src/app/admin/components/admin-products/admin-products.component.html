@@ -3,8 +3,17 @@
         <div class="dark:text-white">
             <h1 class="py-3">Productos</h1>
         </div>
+        <div class="relative rounded-lg shadow-sm w-1/2 lg:w-1/4 p-3">
+            <div class="absolute inset-y-2 left-1 pl-3 flex items-center pointer-events-none">
+                <i class='bx bx-search-alt-2 bx-sm text-slate-400 dark:text-slate-400/50'></i>
+            </div>
+            <form>
+                <input (keyup)="buscar($event)" name="buscar" type="text" placeholder="Buscar"
+                    class="block border-gray-200 dark:border-0 w-full pl-10 py-1 px-3 text-slate-500 rounded-lg dark:bg-slate-900/40 dark:text-slate-400">
+            </form>
+        </div>
         <div class="p-1">
-            <a routerLink="../edit" class="rounded-lg bg-pink-600 text-white p-2 hover:opacity-70 flex visible lg:invisible lg:hidden"><i
+            <a routerLink="../create" class="rounded-lg bg-pink-600 text-white p-2 hover:opacity-70 flex visible lg:invisible lg:hidden"><i
                     class='bx bx-plus bx-sm inline-block align-middle'></i></a>
             <a routerLink="../create" class="rounded-lg bg-pink-600 text-white p-2 hover:opacity-70 hidden invisible lg:visible lg:flex"><i
                     class='bx bx-plus bx-sm inline-block align-middle mr-1'></i>Agregar producto</a>
@@ -14,20 +23,21 @@
 <div *ngFor="let product of products | paginate: { itemsPerPage: 5, currentPage: page }" class="dark:bg-gray-700/10 rounded-lg shadow-md border border-gray-300/60 dark:border-0 divide-y divide-gray-200 dark:divide-gray-700 my-2">
     <div class="grid grid-cols-8 p-3">
         <div class="col-span-4 md:col-span-2 lg:col-span-2">
-            <img class="object-contain object-center max-h-[100px] mx-auto rounded-lg"
-                src="{{ product.images[0] }}" alt="">
+            <a href="../../producto/{{product?.slug}}" class="hover:opacity-70 hover:bg-white">
+                <img class="object-contain object-center max-h-[100px] mx-auto rounded-lg"
+                    src="{{ product?.images[0] }}" alt="">
+            </a>
         </div>
         <div class="col-span-4 md:col-span-6 lg:col-span-4 px-2">
-            <p class="dark:text-white font-semibold line-clamp-1">{{ product.name }}</p>
-            <p class="text-gray-500 text-sm line-clamp-1">Disponibles ({{ product.quantity }})</p>
-            <p class="dark:text-white pt-2">{{ product.price | currency }}</p>
+            <p class="dark:text-white font-semibold line-clamp-1">{{ product?.name }}</p>
+            <p class="text-gray-500 text-sm line-clamp-1">Disponibles ({{ product?.quantity }})</p>
+            <p class="dark:text-white pt-2">{{ product?.price | currency }}</p>
         </div>
         <div class="col-span-8 lg:col-span-2">
-            <button routerLink="../edit/{{ product.slug }}"
+            <button routerLink="../edit/{{ product?._id }}"
                 class="rounded-lg text-white bg-indigo-700 w-full font-semibold hover:opacity-70 text-sm p-2 my-1">Editar
                 información</button>
-            <button
-                class="rounded-lg dark:text-white border border-gray-400 dark:border-gray-600 w-full font-semibold hover:bg-gray-600 hover:text-white dark:hover:text-white text-sm p-2 my-1">Eliminar</button>
+            <button (click)="deleteProduct(product?._id)" class="rounded-lg dark:text-white border border-gray-400 dark:border-gray-600 w-full font-semibold hover:bg-gray-600 hover:text-white dark:hover:text-white text-sm p-2 my-1">Eliminar</button>
         </div>
     </div>
 </div>

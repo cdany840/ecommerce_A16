@@ -1,0 +1,104 @@
+<div *ngFor="let a of address" class="border border-gray-300 dark:border-gray-800 rounded-lg dark:bg-gray-800 drop-shadow-lg divide-y divide-gray-300 dark:divide-gray-700 mb-2 dark:text-white m-2">
+    <div class="p-3">
+        <form [formGroup]="salesForm">
+            <input class="mr-2" type="radio" formControlName="address" name="address" [value]="a?._id" id="address" checked>
+            <span class="font-semibold text-xl inline-block align-middle">Mi dirección</span>
+        </form>
+    </div>
+    <div class="grid grid-cols-2 p-2">
+        <div class="col-span-1">
+            <p>Calle: {{ a?.street }}</p>
+            <p>Colonia: {{ a?.colony }}</p>
+            <p>Ciudad y Estado: {{ a?.city }}, {{ a?.state }}</p>
+        </div>
+        <div class="col-span-1">
+            <p>Número exterior: {{ a?.no_ext }}</p>
+            <p>Número interior: {{ a?.no_int }}</p>
+            <p>Código postal: {{ a?.zip }}</p>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="addAddress" class="dark:bg-gray-800 rounded-lg shadow-lg border border-gray-300/60 dark:border-0 divide-y divide-gray-200 dark:divide-gray-700 dark:text-white mb-3">
+    <div class="dark:border-gray-700 p-3">
+        <span class="font-semibold">Información de envío</span>
+    </div>
+    <div class="grid grid-cols-6 gap-3 p-3">
+        <div class="col-span-6">
+            <form [formGroup]="formAddress">
+                <span class="text-sm font-semibold">Calle</span>
+                <input formControlName="street" name="street"  id="street" type="text"
+                    class="dark:bg-gray-600 rounded-lg my-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
+                <div class="grid col-span-1 lg:grid-cols-2 gap-2">
+                    <div class="col-span-1">
+                        <span class="text-sm font-semibold">Número exterior</span>
+                        <input formControlName="no_ext" is="no_ext" name="no_ext" type="text"
+                            class="dark:bg-gray-600 rounded-lg my-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
+                    </div>
+                    <div class="col-span-1">
+                        <span class="text-sm font-semibold">Número interior(opcional)</span>
+                        <input formControlName="no_int" id="no_int" name="no_int" type="text"
+                            class="dark:bg-gray-600 rounded-lg my-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
+                    </div>
+                </div>
+                <span class="text-sm font-semibold">Código postal</span>
+                <input formControlName="zip" id="zip" name="zip" type="text"
+                    class="dark:bg-gray-600 rounded-lg my-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
+
+                <span class="text-sm font-semibold">Colonia</span>
+                <input formControlName="colony" id="colony" name="colony" type="text"
+                    class="dark:bg-gray-600 rounded-lg my-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
+                <span class="text-sm font-semibold">Estado</span>
+                <div class="flex my-2">
+                    <select formControlName="state" id="state" name="state"
+                        class="dark:bg-gray-600 rounded-lg p-2 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500 w-full">
+                        <option value="0" selected>Selecciona un estado</option>
+                        <option value="Aguascalientes">Aguascalientes</option>
+                        <option value="Baja California">Baja California</option>
+                        <option value="Baja California Sur">Baja California Sur</option>
+                        <option value="Campeche">Campeche</option>
+                        <option value="Chiapas">Chiapas</option>
+                        <option value="Chihuahua">Chihuahua</option>
+                        <option value="Coahuila">Coahuila</option>
+                        <option value="Colima">Colima</option>
+                        <option value="Distrito Federal">Distrito Federal</option>
+                        <option value="Durango">Durango</option>
+                        <option value="Guanajuato">Guanajuato</option>
+                        <option value="Guerrero">Guerrero</option>
+                        <option value="Hidalgo">Hidalgo</option>
+                        <option value="Jalisco">Jalisco</option>
+                        <option value="Estado de México">Estado de México</option>
+                        <option value="Michoacán">Michoacán</option>
+                        <option value="Morelos">Morelos</option>
+                        <option value="Nayarit">Nayarit</option>
+                        <option value="Nuevo León">Nuevo León</option>
+                        <option value="Oaxaca">Oaxaca</option>
+                        <option value="Puebla">Puebla</option>
+                        <option value="Querétaro">Querétaro</option>
+                        <option value="Quintana Roo">Quintana Roo</option>
+                        <option value="San Luis Potosí">San Luis Potosí</option>
+                        <option value="Sinaloa">Sinaloa</option>
+                        <option value="Sonora">Sonora</option>
+                        <option value="Tabasco">Tabasco</option>
+                        <option value="Tamaulipas">Tamaulipas</option>
+                        <option value="Tlaxcala">Tlaxcala</option>
+                        <option value="Veracruz">Veracruz</option>
+                        <option value="Yucatán">Yucatán</option>
+                        <option value="Zacatecas">Zacatecas</option>
+                    </select>
+                </div>
+                <span class="text-sm font-semibold">Ciudad</span>
+                <input formControlName="city" id="city" name="city" type="text"
+                    class="dark:bg-gray-600 rounded-lg my-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
+            </form>
+        </div>
+    </div>
+    <div class="grid justify-end p-2">
+        <button (click)="createAddress()" class="rounded-lg bg-indigo-600 text-white text-sm font-semibold py-2 px-3">Guardar cambios</button>
+    </div>
+</div>
+
+<div class="m-2">
+    <button (click)="addAdress()" class="bg-pink-600 rounded-lg font-semibold text-white text-sm py-2 px-3 float-right hover:opacity-80"><i
+            class='bx bx-plus bx-sm inline-block align-middle mr-1'></i>Agregar dirección</button>
+</div>
