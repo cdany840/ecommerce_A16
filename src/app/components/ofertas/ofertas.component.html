@@ -1,27 +1,23 @@
-<div class="flex items-baseline justify-between border-b border-gray-200 py-8">
+<div class="flex items-baseline justify-between border-b border-gray-200 py-8" id="ofertas">
     <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white uppercase">Ofertas
     </h1>
 </div>
 
-<div class="flex relative rounded-xl overflow-hidden items-center justify-center my-3">
+<div class="flex relative rounded-xl overflow-hidden items-center justify-center my-3 py-6">
     <div class="cursor-pointer flex items-center justify-center w-8 h-8 p-2 m-3 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 hover:bg-white/50 dark:hover:bg-gray-800/60"
         (click)="scrollPrevious()">
         <i class='bx bx-chevron-left bx-md'></i>
     </div>
-    <div class="relative w-full flex gap-6 snap-x overflow-hidden" #product>
-        <div class="snap-start shrink-0">
-            <div class="shrink-0 w-0 sm:w-16"></div>
-        </div>
-        <div class="snap-start shrink-0 first:pl-8 last:pr-8 w-[13rem]" *ngFor="let product of offerProducts">
+    <div *ngIf="offerProducts" class="relative flex gap-6 snap-x overflow-hidden" #product>
+        <div class="snap-start min-w-[13rem] max-w-[13rem]" *ngFor="let product of offerProducts">
             <a href="producto/{{ product.slug }}" class="group">
-                <div
-                class="bg-white dark:bg-gray-800 dark:text-white rounded-lg overflow-hidden border border-gray-200 dark:border-0 shadow-md">
-                <div class="overflow-hidden bg-white">
-                        <div class="badge badge-secondary relative float-right text-xs m-2"><i class="bx bxs-offer bx-xs inline-block align-middle mr-1"></i> {{product.discount | percent}}</div>
-                        <img class="bg-white shrink-0 w-full min-h-[10rem] max-h-[10rem] object-contain bg-center group-hover:opacity-75 transform group-hover:scale-105  group-hover:ease-out duration-500"
+                <div class="bg-white dark:bg-gray-800 dark:text-white rounded-lg overflow-hidden border border-gray-200 dark:border-0 shadow-md h-full">
+                    <div class="overflow-hidden bg-white">
+                        <div class="badge badge-secondary inline-block relative float-right text-xs m-2"><i class="bx bxs-offer bx-xs inline-block align-middle mr-1"></i> {{product.discount | percent}}</div>
+                        <img class="bg-white object-contain object-center w-full mx-auto min-h-[10rem] max-h-[10rem] group-hover:opacity-75 transform group-hover:scale-105  group-hover:ease-out duration-500"
                             src="{{ product.images[0] }}">
                     </div>
-                    <div class="m-2">
+                    <div class="m-2 h-full">
                         <h2 class="uppercase font-bold line-clamp-1">{{ product.name }}</h2>
                         <div class="flex my-1">
                             <div *ngIf="product.old_price > 0" class="badge badge-xs badge-primary text-xs mr-1">Oferta</div>
@@ -45,7 +41,7 @@
                 </div>
             </a>
         </div>
-        <div class="snap-center shrink-0 first:pl-8 last:pr-8 w-[14rem]">
+        <div class="snap-center min-w-[13rem] max-w-[13rem]">
             <a href="/productos/ofertas" class="group">
                 <div
                     class="bg-white dark:bg-gray-800 rounded-lg border border-pink-500 dark:border-cyan-400 shadow-md h-full">
@@ -55,9 +51,6 @@
                     </div>
                 </div>
             </a>
-        </div>
-        <div class="snap-start shrink-0">
-            <div class="shrink-0 w-0 sm:w-16"></div>
         </div>
     </div>
     <div class="cursor-pointer flex items-center justify-center w-8 h-8 p-2 m-3 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 hover:bg-white/50 dark:hover:bg-gray-800/60"

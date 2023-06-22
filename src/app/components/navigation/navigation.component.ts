@@ -6,6 +6,8 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Subcategories } from 'src/app/models/subcategories';
 import { CategoryService } from 'src/app/services/category.service';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 const fadeInOut = trigger('fadeInOut', [
@@ -64,7 +66,15 @@ export class NavigationComponent implements OnInit {
   userData: any;
   categories: any;
 
-  constructor(private themeServiceService: ThemeServiceService, private authService:AuthService, private categoryService: CategoryService) {
+  formSearch = this.fb.group({
+    busqueda: ''
+  });
+
+  get busqueda() {
+    return this.formSearch.get('busqueda') as FormControl;
+  }
+
+  constructor(private themeServiceService: ThemeServiceService, private authService:AuthService, private categoryService: CategoryService, private fb: FormBuilder, private router: Router) {
     this.isDarkMode = this.themeServiceService.isDarkModeEnabled();
   }
 
@@ -114,6 +124,19 @@ export class NavigationComponent implements OnInit {
   getCategories(){
     this.categoryService.getCategories().subscribe(data => {
       this.categories = data;
+    });
+   }
+
+   onSubmit(){
+    if(this.busqueda.value){
+      const busqueda = this.busqueda.value.toLowerCase();
+      this.router.navigate(['/productos/busqueda', busqueda]);
+    }
+   }
+
+   borrarInput(){
+    this.formSearch.patchValue({
+      busqueda: ''
     });
    }
 

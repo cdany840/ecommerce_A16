@@ -20,6 +20,8 @@ export class InfoProductoComponent implements OnInit {
 
   product: any;
 
+  specs: any;
+
   numberProducts: number = 1;
 
   constructor(private productService: ProductsService, private infoProductoService: InfoProductoService, private route: ActivatedRoute){}
@@ -34,6 +36,7 @@ export class InfoProductoComponent implements OnInit {
   getProduct(){
     this.infoProductoService.getBySlug(this.itemId).subscribe((data)=>{
       this.product = data;
+      this.specs = this.product.specs;
     });
   }
 
@@ -49,11 +52,13 @@ export class InfoProductoComponent implements OnInit {
   }
 
   lessOne(){
+    this.product.quantity = this.product.quantity -1
     this.numberProducts = this.numberProducts - 1
     if(this.numberProducts < 0) this.numberProducts = 0
   }
 
   addOne(){
+    this.product.quantity = this.product.quantity +1
     this.numberProducts = this.numberProducts + 1
     if(this.numberProducts >= this.product?.stock) this.numberProducts = this.product?.stock
   }

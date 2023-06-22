@@ -1,12 +1,22 @@
-<header class="bg-white dark:bg-gray-900" id="nav">
-    <nav (mouseleave)="isShow = false" class="mx-auto flex max-w-6xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+<header class="bg-white dark:bg-gray-900 px-3" id="nav">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between mt-2" aria-label="Global">
         <div class="flex lg:flex-1">
             <a routerLink="" class="-m-1.5 p-1.5">
-                <span class="sr-only">Your Company</span>
                 <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="">
             </a>
         </div>
-        <div class="flex lg:hidden">
+        <div class="flex justify-center lg:hidden">
+            <form [formGroup]="formSearch" (ngSubmit)="onSubmit()" class="text-gray-900 dark:text-white">
+                <div class="flex">
+                    <label class="input-group border-0" for="">
+                        <input formControlName="busqueda" type="text" class="rounded-md w-[8rem] my-2 p-1 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700" placeholder="Buscar...">
+                        <span class="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 my-2">
+                            <button type="button" (click)="borrarInput()"><i class='bx bx-x bx-sm pt-1 inline-block align-middle'></i></button>
+                        </span>
+                    </label>
+                    <button type="submit" class="rounded-md m-2 p-1 bg-yellow-400 dark:bg-blue-700 hover:opacity-75">Buscar</button>
+                </div>
+            </form>
             <label for="my-drawer-4" class="drawer-button btn btn-ghost btn-circle">
                 <span routerLink="" class="font-semibold leading-6 text-gray-900 dark:text-white mx-6"><i
                         class="fa-solid fa-cart-shopping"></i></span>
@@ -20,102 +30,33 @@
                 </svg>
             </button>
         </div>
-        <div class="hidden lg:flex lg:gap-x-12">
-            <div class="relative">
-                <button (mouseenter)="fadeInOutDropdown()" type="button"
-                    class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 dark:text-white">
-                    Categorías
-                    <svg class="h-5 w-5 flex-none" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd"
-                            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </button>
-
-                <div (mouseleave)="fadeInOutDropdown()" [@fadeInOut]="isShow ? 'open' : 'close'"
-                    [ngClass]="{'hidden': !isShow}"
-                    class="absolute -left-8 top-full z-40 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white dark:bg-gray-900 shadow-lg">
-
-                    <div class="grid grid-cols-2 gap-2 p-2">
-                        <div class="col-span-1">
-                            <div *ngFor="let c of categories?.slice(0,5)">
-                                <a href="/productos/category/{{c._id}}"
-                                    class="block font-semibold text-gray-900 dark:text-white">
-                                    <div
-                                        class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-custom-400">
-                                        <div
-                                            class="flex h-11 w-11 flex-none items-center justify-center rounded-lg dark:group-hover:bg-white bg-white dark:bg-gray-700 dark:text-white dark:group-hover:text-gray-900">
-                                            <i class="bx-sm" [ngClass]="c.icon"></i>
-                                        </div>
-                                        <div class="flex-auto">
-                                            {{ c.category }}
-                                            <p class="mt-1 text-gray-600 dark:text-gray-200"></p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-span-1">
-                            <div *ngFor="let c of categories?.slice(5,10)">
-                                <a href="/productos/category/{{c._id}}"
-                                    class="block font-semibold text-gray-900 dark:text-white">
-                                    <div
-                                        class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-custom-400">
-                                        <div
-                                            class="flex h-11 w-11 flex-none items-center justify-center rounded-lg dark:group-hover:bg-white bg-white dark:bg-gray-700 dark:text-white dark:group-hover:text-gray-900">
-                                            <i class="bx-sm" [ngClass]="c.icon"></i>
-                                        </div>
-                                        <div class="flex-auto">
-                                            {{ c.category }}
-                                            <p class="mt-1 text-gray-600 dark:text-gray-200"></p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 divide-x divide-gray-900/5 bg-custom-400">
-                        <a routerLink="#"
-                            class="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 dark:text-white hover:bg-custom-400">
-                            <svg class="h-5 w-5 flex-none text-white" viewBox="0 0 20 20" fill="currentColor"
-                                aria-hidden="true">
-                                <path fill-rule="evenodd"
-                                    d="M2 10a8 8 0 1116 0 8 8 0 01-16 0zm6.39-2.908a.75.75 0 01.766.027l3.5 2.25a.75.75 0 010 1.262l-3.5 2.25A.75.75 0 018 12.25v-4.5a.75.75 0 01.39-.658z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            Watch demo
-                        </a>
-                        <a routerLink="#"
-                            class="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 dark:text-white hover:bg-custom-400">
-                            <svg class="h-5 w-5 flex-none text-white" viewBox="0 0 20 20" fill="currentColor"
-                                aria-hidden="true">
-                                <path fill-rule="evenodd"
-                                    d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            Contact sales
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <div class="hidden lg:flex text-gray-900 dark:text-white">
+            <form [formGroup]="formSearch" (ngSubmit)="onSubmit()" class="flex gap-1">
+                <label class="input-group border-0" for="">
+                    <input formControlName="busqueda" type="text" class="rounded-md px-3 py-1 w-[35rem] bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700" placeholder="Buscar...">
+                    <span class="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 ">
+                        <button type="button" (click)="borrarInput()"><i class='bx bx-x bx-sm pt-1 inline-block align-middle'></i></button>
+                    </span>
+                </label>
+                <button type="submit" class="rounded-md px-3 py-1 bg-yellow-400 dark:bg-blue-700 hover:opacity-75">Buscar</button>
+            </form>
         </div>
-        <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-3">
+        <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-1">
             <label for="my-drawer-4" class="drawer-button btn btn-ghost btn-circle">
                 <span class="font-semibold leading-6 text-gray-700 dark:text-white"><i
                         class='bx bx-cart-alt bx-sm'></i></span>
             </label>
 
-            <div class="flex" *ngIf="!userData">
+            <div class="flex gap-1" *ngIf="!userData">
                 <a routerLink="auth/login" class="group">
                     <div
-                        class="h-full p-3 bg-base-300 dark:bg-gray-800 rounded-box text-gray-900 dark:text-white text-sm group-hover:bg-custom-400">
+                        class="p-3 bg-base-300 dark:bg-gray-800 rounded-md text-gray-900 dark:text-white text-xs group-hover:bg-custom-400">
                         Iniciar Sesión
                     </div>
                 </a>
-                <div class="divider divider-horizontal text-sm text-gray-900 dark:text-white m-0"></div>
                 <a routerLink="auth/register" class="group">
                     <div
-                        class="h-full p-3 bg-base-300 dark:bg-gray-800 rounded-box text-gray-900 dark:text-white text-sm group-hover:bg-custom-400">
+                        class="p-3 bg-base-300 dark:bg-gray-800 rounded-md text-gray-900 dark:text-white text-xs group-hover:bg-custom-400">
                         Registrarse
                     </div>
                 </a>
@@ -128,7 +69,7 @@
                     </div>
                 </label>
                 <ul tabindex="0"
-                    class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 dark:bg-gray-800 dark:text-white rounded-box w-52">
+                    class="menu menu-compact dropdown-content p-2 shadow bg-base-100 dark:bg-gray-800 dark:text-white rounded-box w-52">
                     <li><a routerLink="/perfil/detalle" class="justify-between">Perfil</a></li>
                     <li><a routerLink="/perfil/favoritos">Favoritos</a></li>
                     <a class="px-4 py-2 text-sm" routerLink="/admin"
@@ -151,17 +92,15 @@
     </nav>
     <div class="lg:hidden" role="dialog" aria-modal="true" [ngClass]="{'hidden':mobileMenu}">
         <div class="fixed inset-0 z-10"></div>
-        <div
-            class="fixed inset-y-0 right-0 z-20 w-full overflow-y-auto bg-white dark:bg-gray-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <div class="fixed inset-y-0 right-0 z-20 w-full overflow-y-auto bg-white dark:bg-gray-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div class="flex items-center justify-between">
                 <a href="#" class="-m-1.5 p-1.5">
-                    <span class="sr-only">Your Company</span>
                     <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                         alt="">
                 </a>
+                
                 <button (click)="mobileMOpen()" type="button"
                     class="-m-2.5 rounded-md p-2.5 text-gray-900 dark:text-white">
-                    <span class="sr-only">Close menu</span>
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                         aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -233,5 +172,91 @@
                 </div>
             </div>
         </div>
+    </div>
+</header>
+
+
+<header (mouseleave)="isShow = false" class="bg-gray-100 dark:bg-gray-800 mb-3 py-2">
+    <div class="flex justify-center gap-3 lg:gap-10">
+        <a class="dark:text-white" routerLink="/productos">Productos</a>
+        <div class="relative">
+            <button (mouseenter)="fadeInOutDropdown()" type="button"
+                class="flex items-center text-gray-900 dark:text-white">
+                Categorías
+                <svg class="h-5 w-5 flex-none" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clip-rule="evenodd" />
+                </svg>
+            </button>
+
+            <div (mouseleave)="fadeInOutDropdown()" [@fadeInOut]="isShow ? 'open' : 'close'"
+                [ngClass]="{'hidden': !isShow}"
+                class="absolute -left-[7.3rem] lg:-left-8 top-full z-40 mt-2 w-screen max-w-md overflow-hidden rounded-md bg-white dark:bg-gray-900 shadow-lg">
+
+                <div class="grid grid-cols-2 gap-2 p-2">
+                    <div class="col-span-1">
+                        <div *ngFor="let c of categories?.slice(0,5)">
+                            <a href="/productos/category/{{c._id}}"
+                                class="block font-semibold text-gray-900 dark:text-white">
+                                <div
+                                    class="group relative flex items-center gap-x-6 rounded-md p-4 text-sm leading-6 hover:bg-custom-400">
+                                    <div
+                                        class="flex h-11 w-11 flex-none items-center justify-center rounded-md dark:group-hover:bg-white bg-white dark:bg-gray-700 dark:text-white dark:group-hover:text-gray-900">
+                                        <i class="bx-sm" [ngClass]="c.icon"></i>
+                                    </div>
+                                    <div class="flex-auto">
+                                        {{ c.category }}
+                                        <p class="mt-1 text-gray-600 dark:text-gray-200"></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-span-1">
+                        <div *ngFor="let c of categories?.slice(5,10)">
+                            <a href="/productos/category/{{c._id}}"
+                                class="block font-semibold text-gray-900 dark:text-white">
+                                <div
+                                    class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-custom-400">
+                                    <div
+                                        class="flex h-11 w-11 flex-none items-center justify-center rounded-lg dark:group-hover:bg-white bg-white dark:bg-gray-700 dark:text-white dark:group-hover:text-gray-900">
+                                        <i class="bx-sm" [ngClass]="c.icon"></i>
+                                    </div>
+                                    <div class="flex-auto">
+                                        {{ c.category }}
+                                        <p class="mt-1 text-gray-600 dark:text-gray-200"></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 divide-x divide-gray-900/5 bg-custom-400">
+                    <a routerLink="productos"
+                        class="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 dark:text-white hover:bg-custom-400">
+                        <svg class="h-5 w-5 flex-none text-white" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M2 10a8 8 0 1116 0 8 8 0 01-16 0zm6.39-2.908a.75.75 0 01.766.027l3.5 2.25a.75.75 0 010 1.262l-3.5 2.25A.75.75 0 018 12.25v-4.5a.75.75 0 01.39-.658z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Ver productos
+                    </a>
+                    <a href="#contacto"
+                        class="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 dark:text-white hover:bg-custom-400">
+                        <svg class="h-5 w-5 flex-none text-white" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Contacto
+                    </a>
+                </div>
+            </div>
+        </div>
+        <a class="dark:text-white" href="#ofertas">Ofertas</a>
+        <a class="dark:text-white" href="#contacto">Contacto</a>
     </div>
 </header>

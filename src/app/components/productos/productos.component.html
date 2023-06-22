@@ -2,12 +2,11 @@
     <div class="fixed inset-0 bg-black bg-opacity-25"></div>
     <div class="fixed inset-0 z-40 flex">
         <div
-            class="relative ml-auto flex h-full w-full flex-col overflow-y-auto bg-white dark:bg-gray-900 pb-12 shadow-xl">
+            class="relative ml-auto flex h-full w-full flex-col overflow-y-auto bg-white dark:bg-gray-900 shadow-xl">
             <div class="fixed flex w-full items-center justify-between py-4 px-4 bg-white dark:bg-gray-900">
                 <h2 class="text-lg font-medium text-gray-900 dark:text-white">Filtros</h2>
                 <button (click)="filtro()" type="button"
                     class="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white dark:bg-gray-900 p-2 text-gray-400">
-                    <span class="sr-only">Close menu</span>
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                         aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -15,7 +14,6 @@
                 </button>
             </div>
             <form class="mt-20 border-t border-gray-200">
-                <h3 class="sr-only">Categorías</h3>
                 <ul role="list" class="px-2 py-3 font-medium text-gray-900 dark:text-white">
                     <li *ngFor="let c of categories">
                         <a href="/productos/category/{{c._id}}" class="block px-2 py-3">{{ c.category }}</a>
@@ -32,7 +30,6 @@
         
         <button type="button" class="-m-2 ml-4 p-2 text-gray-400  hover:text-gray-500 sm:ml-6 lg:hidden"
             (click)="filtro()">
-            <span class="sr-only">Filters</span>
             <svg class="h-5 w-5" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd"
                     d="M2.628 1.601C5.028 1.206 7.49 1 10 1s4.973.206 7.372.601a.75.75 0 01.628.74v2.288a2.25 2.25 0 01-.659 1.59l-4.682 4.683a2.25 2.25 0 00-.659 1.59v3.037c0 .684-.31 1.33-.844 1.757l-1.937 1.55A.75.75 0 018 18.25v-5.757a2.25 2.25 0 00-.659-1.591L2.659 6.22A2.25 2.25 0 012 4.629V2.34a.75.75 0 01.628-.74z"
@@ -41,7 +38,7 @@
         </button>
     </div>
 </div>
-<section aria-labelledby="products-heading" class="pb-24 pt-6">
+<section aria-labelledby="products-heading" class="py-6">
     <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
         <form class="hidden lg:block">
             <a href="/productos/ofertas">
@@ -53,23 +50,20 @@
                     <a href="/productos/category/{{c._id}}">{{ c.category }}</a>
                 </li>
             </ul>
-            
         </form>
         <div class="lg:col-span-3">
             <div class="grid grid-cols-1 mx-16 md:mx-0 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-x-6 gap-y-6">
                 <div *ngFor="let product of products | paginate: { itemsPerPage: 8, currentPage: page }">
-                    <a href="producto/{{product.slug}}" class="group drop-shadow-sm">
-                        <div class="justify-around rounded-lg min-h-[21rem] max-h-[21rem] overflow-hidden bg-base-100 dark:bg-gray-800 drop-shadow-md group-hover:drop-shadow-2xl">
+                    
+                    <div class="relative justify-around rounded-[0.450rem] min-h-[21rem] max-h-[30rem] overflow-hidden bg-base-100 dark:bg-gray-800 drop-shadow-md group-hover:drop-shadow-2xl">
+                            <a href="producto/{{product.slug}}" class="group drop-shadow-sm">
                             <div class="overflow-hidden">
                                 <img src="{{ product.images[0] }}"
                                     class="bg-white w-full min-h-[10rem] max-h-[10rem] object-contain object-center mx-auto group-hover:opacity-75 transform group-hover:scale-105 duration-500" />
                             </div>
     
                             <div class="pt-2 px-2 dark:text-white h-[8.5rem]">
-                                <a (click)="addFavorite(product._id)">
-                                    <i class='bx  bx-sm text-indigo-600 float-right' [ngClass]="{'bxs-heart': favorite, 'bx-heart': !favorite}"></i>
-                                </a>
-                                <h2 class="flex text-sm uppercase">
+                                <h2 class="flex text-sm uppercase w-[10.5rem]">
                                     <p class="font-bold line-clamp-1">{{ product.name }}</p>
                                 </h2>
                                 <div class="flex m-2">
@@ -91,8 +85,14 @@
                             <label (click)="addProduct(product)" for="my-drawer-4"
                                 class="drawer-button block cursor-pointer bg-custom-400 group-hover:px-4 py-2 mt-1 text-center text-sm font-semibold uppercase transition duration-200 ease-in-out hover:bg-opacity-70 text-white invisible group-hover:visible">
                                 <i class='bx bx-plus'></i><i class='bx bx-cart-alt mx-1'></i>Añadir</label>
+                            </a>
+                            <a (click)="addFavorite(product?._id)">
+                                <i class='bx bx-sm text-indigo-600 top-[10.5rem] right-1 absolute float-right' [ngClass]="{'bx-heart': favorite}"></i>
+                                <div *ngFor="let f of favorite">
+                                    <i class='bx bx-sm text-indigo-600 top-[10.5rem] right-1 absolute float-right' [ngClass]="{'bxs-heart': product._id === f._id, 'bx-heart': product._id !== f._id}"></i>
+                                </div>
+                            </a>
                         </div>
-                    </a>
                 </div>
             </div>
             <div class="float-right m-3 dark:bg-gray-800 rounded-lg overflow-hidden">

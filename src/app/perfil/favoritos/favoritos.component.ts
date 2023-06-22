@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { FavoritosService } from 'src/app/services/favoritos.service';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-favoritos',
@@ -15,7 +16,7 @@ export class FavoritosComponent implements OnInit {
 
   favoriteProducts: any;
 
-  constructor(private favoritos: FavoritosService){}
+  constructor(private favoritos: FavoritosService, private productService: ProductsService){}
 
   ngOnInit(): void {
     const token = localStorage.getItem('token');
@@ -35,8 +36,11 @@ export class FavoritosComponent implements OnInit {
 
   removeFavorite(idProduct: string){
     const favoriteId = idProduct
-    console.log(favoriteId)
     this.favoritos.removeFavoriteById(favoriteId);
+  }
+
+  addToCart(product: any){
+    this.productService.addProduct(product);
   }
 
 }

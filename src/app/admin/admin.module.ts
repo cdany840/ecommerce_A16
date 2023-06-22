@@ -11,6 +11,10 @@ import { StatsComponent } from './components/admin-stats/stats.component';
 import { NgChartsModule } from 'ng2-charts';
 import { AdminCategoriesComponent } from './components/admin-categories/admin-categories.component';
 import { CreateComponent } from './components/admin-categories/create/create.component';
+import { EditComponent } from './components/admin-categories/edit/edit.component';
+import { AdminSubcategoriesComponent } from './components/admin-subcategories/admin-subcategories.component';
+import { CreateSubcategoryComponent } from './components/admin-subcategories/create/createSubcategory.component';
+import { EditSubcategoryComponent } from './components/admin-subcategories/edit-subcategory/edit-subcategory.component';
 
 
 
@@ -22,7 +26,11 @@ import { CreateComponent } from './components/admin-categories/create/create.com
     CreateProductsComponent,
     StatsComponent,
     AdminCategoriesComponent,
-    CreateComponent
+    CreateComponent,
+    EditComponent,
+    AdminSubcategoriesComponent,
+    CreateSubcategoryComponent,
+    EditSubcategoryComponent
   ],
   imports: [
     AdminRoutingModule,

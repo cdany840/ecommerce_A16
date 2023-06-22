@@ -19,6 +19,7 @@ import { adminGuard } from './guards/admin.guard';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'productos', component: ProductosComponent,},
+  { path: 'productos/busqueda/:parametro', component: ProductosComponent,},
   { path: 'productos/ofertas', component: ProductosComponent,},
   { path: 'productos/:subcategory', component: ProductosComponent,},
   { path: 'productos/category/:category', component: ProductosComponent,},

@@ -7,6 +7,10 @@ import { CreateProductsComponent } from './components/admin-products/create-prod
 import { StatsComponent } from './components/admin-stats/stats.component';
 import { AdminCategoriesComponent } from './components/admin-categories/admin-categories.component';
 import { CreateComponent } from './components/admin-categories/create/create.component';
+import { EditComponent } from './components/admin-categories/edit/edit.component';
+import { AdminSubcategoriesComponent } from './components/admin-subcategories/admin-subcategories.component';
+import { CreateSubcategoryComponent } from './components/admin-subcategories/create/createSubcategory.component';
+import { EditSubcategoryComponent } from './components/admin-subcategories/edit-subcategory/edit-subcategory.component';
 
 const routes: Routes = [
   {
@@ -14,13 +18,14 @@ const routes: Routes = [
     children: [
       { path: 'products', component: AdminProductsComponent },
       { path: 'stats', component: StatsComponent },
-      { path: 'categories', component: AdminCategoriesComponent,
-        children: [
-          { path: 'create', component: CreateComponent }
-        ]
-      },
+      { path: 'categories', component: AdminCategoriesComponent },
+      { path: 'create-category', component: CreateComponent },
       { path: 'create', component:  CreateProductsComponent},
       { path: 'edit/:id', component: EditProductsComponent },
+      { path: 'edit-category/:id', component: EditComponent },
+      { path: 'subcategories', component: AdminSubcategoriesComponent },
+      { path: 'create-subcategory', component:  CreateSubcategoryComponent},
+      { path: 'edit-subcategory/:id', component:  EditSubcategoryComponent},
       { path: '', redirectTo: 'stats', pathMatch: 'full' }
     ]
   }

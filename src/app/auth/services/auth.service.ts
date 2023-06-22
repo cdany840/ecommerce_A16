@@ -18,7 +18,7 @@ export class AuthService {
     const url = `${this.baseUrl}/auth/login`;
     const body = { email, password };
 
-    return this.http.post<token>(url, body).pipe(
+    return this.http.post<token>(url, body ).pipe(
       map(({ token }) => this.setAuthentication(token)),
       catchError((err) => {
         Swal.fire({

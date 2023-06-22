@@ -51,6 +51,10 @@ export class EditProductsComponent implements OnInit {
     return this.formProduct.get('old_price') as FormControl;
   }
 
+  get specs(): FormArray {
+    return this.formProduct.get('specs') as FormArray;
+  }
+
   constructor(private categoryService: CategoryService, private infoProductoService: InfoProductoService, private route: ActivatedRoute, private fb: FormBuilder) { 
     const hoy = new Date();
     hoy.setDate(hoy.getDate() - 1);
@@ -117,7 +121,16 @@ export class EditProductsComponent implements OnInit {
         category: this.product.category[0]._id,
         subcategory: this.product.subcategory[0]._id
       });
-      console.log(this.formProduct)
+      const specsArray = this.product.specs.map((spec: string) => spec);
+      specsArray.forEach((spec:any)=>{ 
+        const specs = this.fb.group({
+          spec: [spec.spec],
+          value: [spec.value]
+        });
+        this.specs.push(specs)
+       });
+
+
       this.categoryActual = this.product.category[0].category;
       this.subcategoryActual = this.product.subcategory[0].subcategory;
 
@@ -133,6 +146,13 @@ export class EditProductsComponent implements OnInit {
           old_price: this.price?.value
         })
     }
+    const specArray = this.specs.controls.map((control: any) => {
+      const specValue = control.get('spec')?.value;
+      const valueValue = control.get('value')?.value;
+      return [specValue, valueValue];
+    });
+  
+    this.formProduct.patchValue({ specs: specArray });
     this.infoProductoService.updateProduct(this.editId, this.formProduct.value);
   }
 
@@ -152,6 +172,21 @@ export class EditProductsComponent implements OnInit {
     this.rawPrice = price;
     this.priceWithOffer = price - (price * this.discountNow)
     
+  }
+
+  addSpec() {
+    const specs = this.formProduct.controls.specs as FormArray;
+  
+    specs.push(this.fb.group({
+      spec: [''],
+      value: ['']
+    }));
+
+  }
+
+  removeSpec(index: number){
+    const specs = this.formProduct.controls.specs as FormArray;
+    specs.removeAt(index);
   }
 
 }

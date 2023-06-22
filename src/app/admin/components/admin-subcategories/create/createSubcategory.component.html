@@ -1,0 +1,27 @@
+<div class="col-span-8 rounded-lg border border-gray-200 dark:border-gray-700 my-3">
+    <div class="flex justify-between p-3">
+        <div class="dark:text-white px-3 py-2 my-2">
+            <a routerLink="/admin/subcategories" class="my-auto cursor-pointer">
+                <h1><i class='bx bx-arrow-back inline-block align-middle mr-1'></i>Regresar</h1>
+            </a>
+        </div>
+        <button (click)="createSubcategory()" class="rounded-md px-3 py-2 bg-indigo-700 text-white my-2 hover:opacity-70">Confirmar</button>
+    </div>
+</div>
+<div class="grid grid-cols-12 dark:text-white w-full gap-2 my-3">
+    <div class="col-span-12 md:col-span-6">
+        <form [formGroup]="formSubcategories">
+            <label for="subcategory">Nombre</label>
+            <input formControlName="subcategory" name="subcategory" id="subcategory" type="text" class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full p-2">
+            <label class="block my-1" for="category">Categoría</label>
+            <select formControlName="category" name="category" id="category" class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full p-2">
+                    <option value="" selected>Selecciona una categoría...</option>
+                    <option *ngFor="let c of categories" value="{{ c._id }}">{{ c.category }}</option>
+            </select>
+        </form>
+    </div>
+    <div class="col-span-12 md:col-span-6">
+        
+    </div>
+</div>
+

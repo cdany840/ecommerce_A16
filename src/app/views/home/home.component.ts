@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CarouselComponent } from '../../components/carousel/carousel.component';
 import { CAROUSEL_DATA_ITEMS } from 'src/app/constants/carousel.const';
 import { ICarouselItem } from 'src/app/components/carousel/icarousel-item.metadata';
 
@@ -12,4 +11,5 @@ export class HomeComponent {
 
   public carouselData: ICarouselItem[] = CAROUSEL_DATA_ITEMS;
 
+  constructor() {}
 }

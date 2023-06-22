@@ -31,6 +31,12 @@ export class DetallePerfilComponent implements OnInit {
     avatar: [null],
   });
 
+  updatePassForm = this.fb.group({
+    oldPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+  });
+
   ngOnInit(): void {
     const token = localStorage.getItem('token');
     if (token) {
@@ -97,5 +103,9 @@ export class DetallePerfilComponent implements OnInit {
 
   onFileChanged(event: any) {
     this.myFiles = event.target.files[0];
+  }
+
+  changePassword(id: string){
+    this.perfilService.updatePassword(id, this.updatePassForm.value);
   }
 }

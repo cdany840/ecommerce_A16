@@ -1,0 +1,26 @@
+<div class="dark:text-white border-b border-base-300 dark:border-base-100">
+    <h1 class="text-3xl uppercase font-bold py-6">Categorías</h1>
+</div>
+<div *ngIf="categories" class="grid grid-cols-4 lg:grid-cols-8 gap-2 dark:text-white my-6 py-6">
+    <div class="col-span-2 overflow-hidden rounded-md">
+        <a href="productos/category/{{categories[0]._id}}">
+            <img class="object-contain object-center mx-auto hover:shadow-lg hover:opacity-70 transform hover:scale-105 duration-300" src="assets/img/computadoras.png" alt="">
+        </a>
+        
+    </div>
+    <div class="col-span-2 overflow-hidden rounded-md">
+        <a href="productos/category/{{categories[1]._id}}">
+            <img class="object-contain object-center mx-auto hover:shadow-lg hover:opacity-70 transform hover:scale-105 duration-300" src="assets/img/hardware.png" alt="">
+        </a>
+    </div>
+    <div class="col-span-2 overflow-hidden rounded-md">
+        <a href="productos/category/{{categories[2]._id}}">
+            <img class="object-contain object-center mx-auto hover:shadow-lg hover:opacity-70 transform hover:scale-105 duration-300" src="assets/img/perifericos.png" alt="">
+        </a>
+    </div>
+    <div class="col-span-2 overflow-hidden rounded-md">
+        <a href="productos/category/{{categories[3]._id}}">
+            <img class="object-contain object-center mx-auto hover:shadow-lg hover:opacity-70 transform hover:scale-105 duration-300" src="assets/img/monitores.png" alt="">
+        </a>
+    </div>
+</div>

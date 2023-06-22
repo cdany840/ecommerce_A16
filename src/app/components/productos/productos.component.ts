@@ -31,7 +31,15 @@ export class ProductosComponent implements OnInit {
 
   categories: any;
 
-  constructor(private themeServiceService: ThemeServiceService, private productService: ProductsService, private categoryService: CategoryService, private route: ActivatedRoute, private router: Router, private favoritos: FavoritosService) {
+  busqueda: any;
+
+  constructor(
+    private themeServiceService: ThemeServiceService, 
+    private productService: ProductsService, 
+    private categoryService: CategoryService, 
+    private route: ActivatedRoute, 
+    private router: Router, 
+    private favoritos: FavoritosService) {
     this.isDarkMode = this.themeServiceService.isDarkModeEnabled();
   }
 
@@ -49,14 +57,23 @@ export class ProductosComponent implements OnInit {
 			this.categoryId = params.get('category') ?? ""
 		});
 
-    this.getCategories();
+    this.route.paramMap.subscribe(params => {
+			this.busqueda = params.get('parametro')
+      if(this.busqueda){
+        this.getProductsBySearch();
+      }
+		});
 
+    this.getCategories();
+    
     if(this.subcategoryId)
       this.getProductsSub();
     else if (this.categoryId)
       this.getProductsCat();
     else if (this.router.url === "/productos/ofertas")
       this.getAllOffers();
+    else if (this.busqueda)
+      this.getProductsBySearch();
     else
       this.getAllProducts();
 
@@ -77,6 +94,7 @@ export class ProductosComponent implements OnInit {
   getAllProducts(){
     this.productService.getAllProducts().subscribe((data)=>{
       this.products = data;
+      this.getFavoriteProducts();
     });
   }
 
@@ -85,6 +103,19 @@ export class ProductosComponent implements OnInit {
       this.products = data;
       const offers = this.products.filter((element:any) => element.discount > 0)
       this.products = offers;
+    });
+  }
+
+  getProductsBySearch(){
+    this.productService.getAllProducts().subscribe((data)=>{
+      this.products = data;
+      const busqueda = this.products.filter((element: any) =>
+        element.name.toLowerCase().includes(this.busqueda) ||
+        element.description.toLowerCase().includes(this.busqueda) ||
+        element.category.some((category:any)=> category.category.toLowerCase().includes(this.busqueda)) ||
+        element.subcategory.some((subcategory: any) => subcategory.subcategory.toLowerCase().includes(this.busqueda))
+      );
+      this.products = busqueda;
     });
   }
 
@@ -125,10 +156,21 @@ export class ProductosComponent implements OnInit {
     this.favoritos.addFavorite(data);
   }
 
+  getFavoriteProducts(){
+    if(this.userToken){
+
+      this.favoritos.getFavoritesById(this.userToken._id).subscribe(data => {
+        this.favorite = data
+        const favoriteProducts = this.products.filter((element) =>this.favorite.some((favoriteItem: { productId: any }) => element._id === favoriteItem?.productId._id))
+        this.favorite = favoriteProducts
+      })
+    }
+  }
+
   getCategories(){
     this.categoryService.getCategories().subscribe(data => {
       this.categories = data;
     });
-   }
+  }
 
 }

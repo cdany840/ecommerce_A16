@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './views/home/home.component';
 import { OfertasComponent } from './components/ofertas/ofertas.component';
 import { ProductosComponent } from './components/productos/productos.component';
@@ -23,6 +23,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { DatosEnvioComponent } from './perfil/datos-envio/datos-envio.component';
 import { SearchPipe } from './pipes/search.pipe';
 import { FavoritosComponent } from './perfil/favoritos/favoritos.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { BrandsComponent } from './components/brands/brands.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { LoadingInterceptor } from './interceptor/loading.interceptor';
 
 
 @NgModule({
@@ -42,7 +48,12 @@ import { FavoritosComponent } from './perfil/favoritos/favoritos.component';
     CartComponent,
     DatosEnvioComponent,
     SearchPipe,
-    FavoritosComponent
+    FavoritosComponent,
+    FooterComponent,
+    ContactComponent,
+    BrandsComponent,
+    CategoriesComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +65,13 @@ import { FavoritosComponent } from './perfil/favoritos/favoritos.component';
     FormsModule,
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

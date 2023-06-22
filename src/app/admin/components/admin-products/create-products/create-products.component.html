@@ -38,6 +38,7 @@
                 <option *ngFor="let s of subcategories" value="{{s._id}}" selected>{{s.subcategory }}</option>
             </select>
             <div class="col-span-6 mt-4">
+                <label class="block my-1" for="">Especificaciones</label>
                 <button class="rounded-lg bg-pink-600 text-white hover:opacity-80 w-full py-2 px-3" (click)="addSpec()"><i class='bx bx-plus bx-sm pr-1 inline-block align-middle'></i>Añadir especificación</button>
                 <div formArrayName="specs">
                     <div *ngFor="let s of specs.controls; let i = index" [formGroupName]="i">
@@ -61,8 +62,8 @@
         <form [formGroup]="formProduct">
             <label class="block my-1" for="">Imágenes</label>
             <div class="grid grid-cols-6 gap-2 my-2">
-                <div>
-                    <img alt="">
+                <div *ngFor="let img of selectedImage">
+                    <img [src]="img" alt="">
                 </div>
                 <div class="col-span-6">
                     <label for="images" class="flex items-center cursor-pointer text-sm rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full py-2 px-3">
@@ -75,6 +76,18 @@
                     <input formControlName="slug"
                         class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full py-2 px-3"
                         type="text" name="slug" [value]="slug" id="slug">
+                </div>
+                <div class="col-span-6 lg:col-span-3">
+                    <label class="block my-1" for="">#SKU</label>
+                    <input formControlName="sku" name="sku"
+                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 py-2 px-3"
+                        type="text">
+                </div>
+                <div class="col-span-6 lg:col-span-3">
+                    <label class="block my-1" for="">Disponibilidad</label>
+                    <input formControlName="stock" name="stock"
+                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 py-2 px-3"
+                        type="text">
                 </div>
                 <div class="col-span-6 lg:col-span-3">
                     <label class="block my-1" for="">Precio</label>
@@ -92,19 +105,6 @@
                     <label class="block my-1" for="">Descuento ({{ discountNow | percent }})</label>
                     <input (change)="setValue($event)" formControlName="discount" name="discount" id="discount" type="range" min="0" max="1" class="range range-accent dark:border dark:border-gray-700" step="0.01" value="0"/>
                 </div>
-                <div class="col-span-6 lg:col-span-3">
-                    <label class="block my-1" for="">#SKU</label>
-                    <input formControlName="sku" name="sku"
-                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 py-2 px-3"
-                        type="text">
-                </div>
-                <div class="col-span-6 lg:col-span-3">
-                    <label class="block my-1" for="">Disponibilidad</label>
-                    <input formControlName="stock" name="stock"
-                        class="w-full rounded-md dark:border-gray-700 dark:bg-gray-700 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 py-2 px-3"
-                        type="text">
-                </div>
-                
                 <div class="col-span-6">
                     <label class="block my-1" for="">Fecha termino</label>
                     <input type="date" [min]="fechaStart" formControlName="date_end" class="rounded-md border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:border-gray-700 dark:bg-gray-700 w-full py-2 px-3"/>

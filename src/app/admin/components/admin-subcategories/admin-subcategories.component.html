@@ -1,0 +1,25 @@
+<div class="col-span-8 rounded-lg border border-gray-200 dark:border-gray-700 my-3">
+    <div class="flex justify-between p-3">
+        <div class="dark:text-white px-3 py-2 my-2"><h1>Subcategorías</h1></div>
+        <a routerLink="../create-subcategory" class="rounded-md px-3 py-2 bg-pink-600 text-white my-2 hover:opacity-70"><i class="bx bx-plus bx-sm inline-block align-middle mr-1"></i>Agregar</a>
+    </div>
+</div>
+<div class="grid grid-cols-12 dark:text-white w-full gap-2 my-3">
+    <div *ngFor="let c of categories | paginate: { itemsPerPage: 1, currentPage: page }" class="col-span-12">
+        <h1 class="font-semibold text-lg">{{ c.category }}</h1>
+        <div *ngFor="let s of c.subcategory" class="rounded-lg shadow-md border border-gray-300/60 dark:border-0 p-3 my-2">
+            <div class="grid grid-cols-8 p-3">
+                <div class="col-span-8 lg:col-span-6">
+                    <h2>{{ s.subcategory }}</h2>
+                </div>
+                <div class="col-span-8 lg:col-span-2">
+                    <button routerLink="../edit-subcategory/{{s._id}}" class="rounded-lg text-white bg-indigo-700 w-full font-semibold hover:opacity-70 text-sm p-2 my-1">Editar información</button>
+                    <button (click)="deleteSubcategory(s._id)" class="rounded-lg dark:text-white border border-gray-400 dark:border-gray-600 w-full font-semibold hover:bg-gray-600 hover:text-white dark:hover:text-white text-sm p-2 my-1">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<pagination-controls class="float-right m-3 dark:bg-gray-800 rounded-lg" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+
+

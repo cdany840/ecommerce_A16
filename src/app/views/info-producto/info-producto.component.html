@@ -9,9 +9,9 @@
         <div class="grid gap-8 lg:grid-cols-6 lg:items-start">
             <div class="lg:col-span-4">
                 <div class="relative mt-4 overflow-hidden rounded-lg group">
-                    <div >
+                    <div class="bg-white">
                         <img alt="Tee" [src]="product?.images[selectedImageIndex]"
-                            class="h-[35rem] w-full object-contain object-center transform hover:scale-125 ease-in-out duration-500" />
+                            class="lg:min-h-[30rem] lg:max-h-[30rem] w-full object-contain object-center transform hover:scale-125 ease-in-out duration-500" />
                     </div>
 
                     <div
@@ -35,7 +35,23 @@
 
                 <h1 class="text-justify text-lg text-gray-900 dark:text-white py-6">{{ product?.description }}</h1>
 
-            </div>
+                <div class="flex justify-center lg:justify-start overflow-x-auto dark:text-white">
+                    <table class="rounded-lg shadow-md overflow-hidden">
+                      <thead>
+                        <tr>
+                          <th class="px-6 py-2 bg-gray-100 dark:bg-gray-700">Especificaciones</th>
+                          <th class="px-6 py-2 bg-gray-100 dark:bg-gray-700"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="bg-white dark:bg-gray-800" *ngFor="let s of specs">
+                          <td class="px-6 py-2">{{ s.spec }}</td>
+                          <td class="px-6 py-2">{{ s.value }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
 
             <div class="lg:col-span-2 lg:sticky lg:top-0">
                 <legend class="text-lg font-bold text-gray-900 dark:text-white pt-6 pb-1">Precio</legend>
@@ -73,3 +89,5 @@
         <app-ofertas></app-ofertas>
     </div>
 </section>
+
+<app-footer></app-footer>

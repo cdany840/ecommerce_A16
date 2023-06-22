@@ -9,7 +9,7 @@ export const CAROUSEL_DATA_ITEMS: ICarouselItem[] = [
         },
         subtitle: '',
         link: '/',
-        image: 'assets/img/c310da61ef7f4243cf0a8b39c7fb74e0.jpg'
+        image: 'assets/img/computadoras.png'
     },
     {
         id: 2,
@@ -19,7 +19,7 @@ export const CAROUSEL_DATA_ITEMS: ICarouselItem[] = [
         },
         subtitle: '',
         link: '/',
-        image: 'assets/img/turntable-1109588_1280.jpg'
+        image: 'assets/img/hardware.png'
     },
     {
         id: 3,
@@ -29,6 +29,16 @@ export const CAROUSEL_DATA_ITEMS: ICarouselItem[] = [
         },
         subtitle: '',
         link: '/',
-        image: 'assets/img/b8100552e0fe2eb22830b80ef2b97e67.png'
+        image: 'assets/img/perifericos.png'
+    },
+    {
+        id: 4,
+        title: {
+            first: '',
+            second: ''
+        },
+        subtitle: '',
+        link: '/',
+        image: 'assets/img/monitores.png'
     },
 ]

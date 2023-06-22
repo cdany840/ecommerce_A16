@@ -46,4 +46,16 @@ export class PerfilService {
       }
     )
   }
+
+  updatePassword(id: string, data: any){
+    const url = `${this.baseUrl}/auth/uppass/${id}`;
+    return this.http.patch(url, data, {responseType: 'text'}).subscribe(
+      response => {
+        Swal.fire('Éxito', 'Contraseña actualizada', 'success');
+      },
+      error => {
+        Swal.fire('Error', error.message, 'error' );
+      }
+    )
+  }
 }

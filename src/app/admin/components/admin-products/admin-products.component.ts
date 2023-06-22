@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { InfoProductoService } from 'src/app/services/info-producto.service';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -19,9 +18,8 @@ export class AdminProductsComponent implements OnInit {
 
   constructor(
     private productsService: ProductsService,
-    private infoProduct: InfoProductoService,
-    private fb: FormBuilder
-  ) {}
+    private infoProduct: InfoProductoService
+    ) {}
 
   ngOnInit(): void {
     this.getAllProducts();

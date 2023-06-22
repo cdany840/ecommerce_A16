@@ -45,23 +45,24 @@
 
 </div>
 
-<div
-    class="dark:bg-gray-800 rounded-lg shadow-lg border border-gray-300/60 dark:border-0 divide-y divide-gray-200 dark:divide-gray-700 dark:text-white mt-3">
+<div class="dark:bg-gray-800 rounded-lg shadow-lg border border-gray-300/60 dark:border-0 divide-y divide-gray-200 dark:divide-gray-700 dark:text-white mt-3">
     <div class="dark:border-gray-700 p-3">
         <span class="font-semibold">Cambiar contraseña</span>
     </div>
     <div class="p-3">
-        <span class="text-sm font-semibold">Contraseña anterior</span>
-        <input type="password"
-            class="dark:bg-gray-600 rounded-lg my-2 px-3 py-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
-        <span class="text-sm font-semibold">Nueva contraseña</span>
-        <input type="password"
-            class="dark:bg-gray-600 rounded-lg my-2 px-3 py-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
-        <span class="text-sm font-semibold">Confirmar contraseña</span>
-        <input type="password"
-            class="dark:bg-gray-600 rounded-lg my-2 px-3 py-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
+        <form [formGroup]="updatePassForm" action="">
+            <span class="text-sm font-semibold">Contraseña anterior</span>
+            <input formControlName="oldPassword" type="password" autocomplete="off"
+                class="dark:bg-gray-600 rounded-lg my-2 px-3 py-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
+            <span class="text-sm font-semibold">Nueva contraseña</span>
+            <input formControlName="newPassword" type="password" autocomplete="off"
+                class="dark:bg-gray-600 rounded-lg my-2 px-3 py-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
+            <span class="text-sm font-semibold">Confirmar contraseña</span>
+            <input formControlName="confirmPassword" type="password" autocomplete="off"
+                class="dark:bg-gray-600 rounded-lg my-2 px-3 py-2 w-full border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-500">
+        </form>
     </div>
     <div class="grid justify-end p-2">
-        <button class="rounded-lg bg-indigo-600 text-white text-sm font-semibold py-2 px-3">Guardar cambios</button>
+        <button (click)="changePassword(user?._id)" class="rounded-lg bg-indigo-600 text-white text-sm font-semibold py-2 px-3">Guardar cambios</button>
     </div>
 </div>

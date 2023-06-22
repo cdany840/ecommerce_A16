@@ -16,10 +16,34 @@ export class FavoritosService {
     const url = `${this.baseUrl}/wish`
     this.http.post(url, data).subscribe(
       response => {
-        alert('Agregado')
+          Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: 'Producto agregado a favoritos!',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+          });
       },
       error => {
-        alert('Error')
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'error',
+          title: 'Algo salió mal',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          }
+        });
       }
     )
   }
@@ -34,17 +58,35 @@ export class FavoritosService {
     return this.http.delete(url).subscribe(
       response => {
         Swal.fire({
+          toast: true,
+          position: 'top-end',
           icon: 'success',
-          title: 'Producto eliminado!',
+          title: 'Producto eliminado',
           showConfirmButton: false,
-          timer: 1500
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          }
+        }).then( () =>{
+            window.location.reload()
         })
-        setTimeout(function(){
-          location.reload();
-        }, 2000)
       },
       error => {
-        Swal.fire('Error', error.message, 'error' );
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'error',
+          title: 'Algo salió mal',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          }
+        });
       }
     );
   }

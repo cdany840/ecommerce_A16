@@ -2,7 +2,7 @@
     <div class="rounded-lg overflow-hidden hidden col-span-2 lg:grid">
         <h1 class="text-xl text-white bg-gray-800 uppercase p-3 font-bold drop-shadow-lg"><i class='bx bx-menu bx-sm mr-1 inline-block align-middle'></i>Categorías</h1>
     
-        <ul class="list-none z-30">
+        <ul *ngIf="categories" class="list-none z-30">
             <li class="bg-white dark:bg-gray-900 hover:bg-custom-400 hover:dark:bg-custom-400 dark:text-white cursor-pointer" *ngFor="let c of categories" (mouseenter)="sideMenu(c)" (mouseleave)="hidePopover()">
                 <a class="uppercase font-semibold block p-[0.6rem]" routerLink="/productos/category/{{c._id}}">
                     <i class='bx-sm mr-1 inline-block align-middle' [ngClass]="c.icon"></i>{{c.category}}
