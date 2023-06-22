@@ -1,3 +1,3 @@
 export const environment = {
-  baseUrl: 'https://ecommerce-nest.vercel.app/'
+  baseUrl: 'https://ecommerce-nestjs.vercel.app/'
 }
