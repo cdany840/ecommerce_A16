@@ -8,8 +8,8 @@
         (click)="scrollPrevious()">
         <i class='bx bx-chevron-left bx-md'></i>
     </div>
-    <div *ngIf="offerProducts" class="relative flex gap-6 snap-x overflow-hidden" #product>
-        <div class="snap-start min-w-[13rem] max-w-[13rem]" *ngFor="let product of offerProducts">
+    <div *ngIf="offerProducts" class="relative flex gap-6 snap-x overflow-y-hidden md:overflow-hidden" #product>
+        <div class="snap-center md:snap-start min-w-[13rem] max-w-[13rem]" *ngFor="let product of offerProducts">
             <a href="producto/{{ product.slug }}" class="group">
                 <div class="bg-white dark:bg-gray-800 dark:text-white rounded-lg overflow-hidden border border-gray-200 dark:border-0 shadow-md h-full">
                     <div class="overflow-hidden bg-white">
@@ -42,11 +42,10 @@
             </a>
         </div>
         <div class="snap-center min-w-[13rem] max-w-[13rem]">
-            <a href="/productos/ofertas" class="group">
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-lg border border-pink-500 dark:border-cyan-400 shadow-md h-full">
+            <a href="/productos/ofertas">
+                <div class="bg-white dark:bg-gray-800 rounded-lg border border-pink-500 dark:border-cyan-400 shadow-md h-full">
                     <div class="flex items-center justify-center h-full">
-                        <button class="btn btn-secondary dark:btn-info rounded-full h-24 w-24 p-3">Ver más ofertas<i
+                        <button class="btn btn-secondary dark:btn-info hover:opacity-70 rounded-full h-24 w-24 p-3">Ver más ofertas<i
                                 class='bx bx-right-arrow-alt bx-lg pl-1'></i></button>
                     </div>
                 </div>

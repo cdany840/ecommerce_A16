@@ -33,7 +33,6 @@ export class LoginPageComponent {
       this.authService.login(email, password).subscribe({
         next: () => window.location.href = '/',
         error: (message) => {
-          console.log(message);
         }
       });
     } else{

@@ -63,7 +63,7 @@ import { LoadingInterceptor } from './interceptor/loading.interceptor';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [
     {

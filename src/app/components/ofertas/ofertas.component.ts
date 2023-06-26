@@ -31,7 +31,7 @@ export class OfertasComponent implements OnInit {
 
   scrollPrevious() {
     const container = document.querySelector('.snap-x') as HTMLElement;
-    const scrollAmount = -300;
+    const scrollAmount = -250;
     container.scrollBy({
       left: scrollAmount,
       behavior: 'smooth',
@@ -40,7 +40,7 @@ export class OfertasComponent implements OnInit {
 
   scrollNext() {
     const container = document.querySelector('.snap-x') as HTMLElement;
-    const scrollAmount = 300;
+    const scrollAmount = 250;
     container.scrollBy({
       left: scrollAmount,
       behavior: 'smooth',
